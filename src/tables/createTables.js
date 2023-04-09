@@ -1,9 +1,8 @@
 import { createPassenger } from "./passenger.js";
-import { createPassengerReservation } from "./passengerReserve.js";
-import { createDriver } from "./drivers.js";
+import { createPassengerReservation } from "./passenger-reserve.js";
+import { createDriver } from "./drivers-many-days.js";
 import { createDriverAvailability } from "./driver_availability.js";
 
-// import { DriverAvailability } from "./driver_availability.js";
 
 export async function createTables(sequelize) {
   
@@ -23,16 +22,4 @@ export async function createTables(sequelize) {
      Passenger };
   
 }
-// createTables().then( (bla)=> bla.Passenger.create({  name: "kjhgfe",
-// mail: "sd@mail.com",}))
 
-// const newDriver = {
-//   name: "kjhgfe",
-//   mail: "sd@mail.com",
-//   cel: "555-1234",
-//   number_of_passengers: 3,
-// };
-
-// Driver().then((model) =>
-//   model.create(newDriver).then((result) => console.log(result))
-// );

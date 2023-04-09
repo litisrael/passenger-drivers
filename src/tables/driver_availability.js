@@ -1,6 +1,6 @@
 
 import { DataTypes } from "sequelize";
-import { createDriver } from "./drivers.js";
+import { createDriver } from "./drivers-many-days.js";
 
 export async function createDriverAvailability(sequelize) {
   const driverAvailability = sequelize.define(

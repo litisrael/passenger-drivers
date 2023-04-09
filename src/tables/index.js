@@ -1,7 +1,8 @@
 import { getConnection } from "../database/conecction.js";
-import * as Tables from "./createTable.js";
+import * as Tables from "./createTables.js";
+import { initializeApp } from "../api/index.js";
 
-async function main() {
+export async function initDB() {
   const sequelize = await getConnection();
    sequelize.sync({force:true});
   const tables = await Tables.createTables(sequelize);
@@ -9,11 +10,11 @@ async function main() {
   return tables;
 }
 
-main().then(tables => {
-  console.log("¡Tablas creadas con éxito!");
-}).catch(error => {
-  console.error("Error al crear las tablas:", error);
-});
+// main().then(tables => {
+//   console.log("¡Tablas creadas con éxito!");
+// }).catch(error => {
+//   console.error("Error al crear las tablas:", error);
+// });
 
 // async function main() {
 //   const sequelize = await getConnection();
