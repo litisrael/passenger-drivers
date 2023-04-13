@@ -1,32 +1,30 @@
 import express from "express";
-import {  passengerRouter} from "./routes/passenger.routes.js";
+import { passengerRouter } from "./routes/passenger.routes.js";
 import { initDB } from "../tables/index.js";
-// import { createServers } from "./app.js";
-import {
-  driverTouristRouter
-} from "./routes/drivers.tourist.routes.js";
+import { driverTouristRouter } from "./routes/drivers.tourist.routes.js";
+import { driverAvailabilityRouter } from "./routes/driver.availability.js";
+import { passengerReservationRouter } from "./routes/passenger.reserve.route.js";
 
-export async function createServers(){
-  const DB = await initDB()
-  const driverRouter  =  driverTouristRouter(DB);
-  const passenger = await passengerRouter(DB)
-  // const deleteDriver = await  deleteDriverTourist(DB)
-  // const getDriver = await getDriverTourist(DB)
-  // const getDrivers = await getDriversTourist(DB);
-  return { driverRouter,passenger};
+export async function createServers() {
+  const DB = await initDB();
+  const driverRouter = driverTouristRouter(DB);
+  const passenger = passengerRouter(DB);
+  const driverAvailability = driverAvailabilityRouter(DB);
+  const PassengerReservation = passengerReservationRouter(DB);
+  return { driverAvailability, driverRouter, passenger, PassengerReservation };
 }
 
-
-export const initRouterDriver =async () => {
-   const routers = await createServers();
+export const initRouterDriver = async () => {
+  const routers = await createServers();
   const app = express();
 
-//  midelwer
+  //  midelwer
   // app.use(morgan("dev"));
   app.use(express.json());
-   
-  app.use("/drivers", routers.driverRouter );
-  app.use("/passenger", routers.passenger );
-  return app
-};
 
+  app.use("/drivers", routers.driverRouter);
+  app.use("/driverAvailability", routers.driverAvailability);
+  app.use("/passenger", routers.passenger);
+  app.use("/passengerReserve", routers.PassengerReservation);
+  return app;
+};

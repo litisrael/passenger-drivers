@@ -1,8 +1,7 @@
 import { createPassenger } from "./passenger.js";
-import { createPassengerReservation } from "./passenger-reserve.js";
+import { createPassengerReservation } from "./passenger.reserve.js";
 import { createDriver } from "./drivers.tourist.js";
 import { createDriverAvailability } from "./driver.availability.js";
-
 
 export async function createTables(sequelize) {
   
@@ -15,11 +14,13 @@ export async function createTables(sequelize) {
   DriverAvailability.belongsTo(Driver, { foreignKey: "driver_id" });
   Passenger.hasMany(PassengerReservation, { foreignKey: 'passenger_id' });
   PassengerReservation.belongsTo(Passenger, { foreignKey: 'passenger_id' });
+
+  Passenger.hasMany(PassengerReservation, { foreignKey: 'passenger_id' });
+  PassengerReservation.belongsTo(Passenger, { foreignKey: 'passenger_id' });
+
   return {
      Driver, 
     DriverAvailability,
      PassengerReservation, 
      Passenger };
-  
 }
-

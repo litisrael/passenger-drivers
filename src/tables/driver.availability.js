@@ -1,6 +1,5 @@
 
 import { DataTypes } from "sequelize";
-import { createDriver } from "./drivers.tourist.js";
 
 export async function createDriverAvailability(sequelize) {
   const driverAvailability = sequelize.define(
@@ -33,11 +32,3 @@ export async function createDriverAvailability(sequelize) {
 
   return driverAvailability;
 }
-
-// DriverAvailability().then((model) =>
-//    model.create( {
-
-//     occupied_from:'2023-07-10',
-//     occupied_to:  '2023-07-20'
-//    }).then((result) => console.log(result))
-// );
