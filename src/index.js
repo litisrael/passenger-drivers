@@ -1,10 +1,8 @@
-
-import { initializeApp } from "./api/index.js";
+import { initRouterDriver } from "./api/routes/drivers.tourist.js";
 
 async function main() {
-  
-const app = initializeApp()
- app.listen(4000)
-
+  const app = await  initRouterDriver();
+  app.listen(4000);
 }
-main()
+
+main();
