@@ -1,4 +1,4 @@
-import { initRouterDriver } from "./api/routes/drivers.tourist.js";
+import { initRouterDriver } from "./api/app.js";
 
 async function main() {
   const app = await  initRouterDriver();

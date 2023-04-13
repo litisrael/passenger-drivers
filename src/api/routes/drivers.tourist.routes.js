@@ -1,8 +1,8 @@
 import express from "express";
 
-
-export async function createDriverTourist(DB) {
+export function driverTouristRouter(DB) {
   const driverRouter = express.Router();
+
   driverRouter.post("/", async (req, res) => {
     console.log(req.body);
     try {
@@ -15,11 +15,6 @@ export async function createDriverTourist(DB) {
     }
   });
 
-  return driverRouter;
-}
-
-export async function getDriversTourist(DB) {
-  const driverRouter = express.Router();
   driverRouter.get("/", async (req, res) => {
     try {
       const drivers = await DB.Driver.findAll();
@@ -30,12 +25,6 @@ export async function getDriversTourist(DB) {
       });
     }
   });
-
-  return driverRouter;
-}
-
-export async function getDriverTourist(DB) {
-  const driverRouter = express.Router();
 
   driverRouter.get("/:driver_id", async (req, res) => {
     const { driver_id } = req.params;
@@ -52,12 +41,6 @@ export async function getDriverTourist(DB) {
       });
     }
   });
-
-  return driverRouter;
-}
-
-export async function deleteDriverTourist(DB) {
-  const driverRouter = express.Router();
 
   driverRouter.delete("/:driver_id", async (req, res) => {
     const { driver_id } = req.params;
@@ -85,11 +68,6 @@ export async function deleteDriverTourist(DB) {
     }
   });
 
-  return driverRouter;
-}
-
-export const updateDriverTourist = async (DB) => {
-  const driverRouter = express.Router();
   driverRouter.put("/:driver_id", async (req, res) => {
     try {
       const { driver_id } = req.params;
@@ -117,4 +95,4 @@ export const updateDriverTourist = async (DB) => {
   });
 
   return driverRouter;
-};
+}
