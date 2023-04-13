@@ -1,17 +1,15 @@
 //import { connection } from "../database/conecction.js";
 import { DataTypes } from "sequelize";
-import { createDriverAvailability } from "./driver_availability.js";
-
+import { createDriverAvailability } from "./driver.availability.js";
 
 export const createDriver = async (sequelize) => {
- 
   const Driver = sequelize.define(
     "Driver",
     {
       driver_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
       },
       name: {
         type: DataTypes.STRING(45),
@@ -30,7 +28,7 @@ export const createDriver = async (sequelize) => {
         allowNull: true,
       },
       languages: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true,
       },
     },
@@ -40,6 +38,7 @@ export const createDriver = async (sequelize) => {
       schema: "extended_travel",
     }
   );
+  
 
   return Driver;
 };

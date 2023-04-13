@@ -14,12 +14,18 @@ const Passenger = sequelize.define('passenger', {
     mail: {
       type: DataTypes.STRING(45),
       allowNull: false
+    },
+    phone: {
+      type: DataTypes.STRING(20),
+      allowNull: true
     }
     
   },  {
     tableName: "passenger",
     timestamps: false,
     schema: "extended_travel",
-  });
+  },
+  )
+  // sequelize.sync({force:true});;
   return Passenger
 }

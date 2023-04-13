@@ -1,19 +1,22 @@
 import express from "express";
 
 export function driverTouristRouter(DB) {
-  const driverRouter = express.Router();
 
-  driverRouter.post("/", async (req, res) => {
-    console.log(req.body);
-    try {
-      let newDriver = await DB.Driver.create({ ...req.body });
-      return res.json(newDriver);
-    } catch (error) {
-      res.status(500).json({
-        message: error.message,
-      });
-    }
-  });
+    const driverRouter = express.Router();
+    driverRouter.post("/", async (req, res) => {
+      try {
+        const newDriver = await DB.Driver.create(req.body, {
+          fields: ["name", "mail", "cel", "number_of_passengers", "languages"],
+        });
+        return res.json(newDriver);
+      } catch (error) {
+        return res.status(500).json({
+          message: error.message,
+        });
+      }
+    });
+  
+  
 
   driverRouter.get("/", async (req, res) => {
     try {

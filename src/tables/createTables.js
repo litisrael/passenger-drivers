@@ -1,7 +1,7 @@
 import { createPassenger } from "./passenger.js";
 import { createPassengerReservation } from "./passenger-reserve.js";
-import { createDriver } from "./drivers-many-days.js";
-import { createDriverAvailability } from "./driver_availability.js";
+import { createDriver } from "./drivers.tourist.js";
+import { createDriverAvailability } from "./driver.availability.js";
 
 
 export async function createTables(sequelize) {
