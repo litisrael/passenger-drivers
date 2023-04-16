@@ -9,9 +9,9 @@ export async function createServers() {
   const DB = await initDB();
   const driverRouter = driverTouristRouter(DB);
   const passenger = passengerRouter(DB);
-  const driverAvailability = driverAvailabilityRouter(DB);
+  const driverAvailability =  driverAvailabilityRouter(DB);
   const PassengerReservation = passengerReservationRouter(DB);
-  return { driverAvailability, driverRouter, passenger, PassengerReservation };
+  return { driverRouter, driverAvailability, passenger, PassengerReservation };
 }
 
 export const initRouterDriver = async () => {
@@ -26,5 +26,6 @@ export const initRouterDriver = async () => {
   app.use("/driverAvailability", routers.driverAvailability);
   app.use("/passenger", routers.passenger);
   app.use("/passengerReserve", routers.PassengerReservation);
+  // app.use("/passengerReserve", routers.PassengerReservation);
   return app;
 };

@@ -5,22 +5,21 @@ import { createDriverAvailability } from "./driver.availability.js";
 
 export async function createTables(sequelize) {
   
-  const PassengerReservation = await createPassengerReservation(sequelize);
   const Passenger = await createPassenger(sequelize);
   const Driver = await createDriver(sequelize);
+  const PassengerReservation = await createPassengerReservation(sequelize);
   const DriverAvailability = await createDriverAvailability(sequelize);
 
   Driver.hasMany(DriverAvailability, { foreignKey: "driver_id" });
   DriverAvailability.belongsTo(Driver, { foreignKey: "driver_id" });
-  Passenger.hasMany(PassengerReservation, { foreignKey: 'passenger_id' });
-  PassengerReservation.belongsTo(Passenger, { foreignKey: 'passenger_id' });
 
   Passenger.hasMany(PassengerReservation, { foreignKey: 'passenger_id' });
   PassengerReservation.belongsTo(Passenger, { foreignKey: 'passenger_id' });
 
   return {
-     Driver, 
+    PassengerReservation, 
     DriverAvailability,
-     PassengerReservation, 
-     Passenger };
+    Passenger,
+    Driver 
+     };
 }

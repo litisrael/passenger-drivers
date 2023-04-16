@@ -1,15 +1,14 @@
 
 import { DataTypes } from "sequelize";
 
-export async function createDriverAvailability(sequelize) {
+export  function createDriverAvailability(sequelize) {
   const driverAvailability = sequelize.define(
-    "driver_availability",
+    "availability",
     {
       id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true
       },
 
       occupied_from: {
@@ -23,12 +22,12 @@ export async function createDriverAvailability(sequelize) {
     },
     {
       tableName: "driver_availability",
-
-      schema: "extended_travel",
+    
+    schema: "extended_travel",
     }
   );
 
-  // await driverAvailability.sync({ force: true });
+// await driverAvailability.sync({ force: true });
 
   return driverAvailability;
 }

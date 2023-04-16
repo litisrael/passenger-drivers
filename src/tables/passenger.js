@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 
-export const createPassenger = async (sequelize) => {
+export const createPassenger =  (sequelize) => {
 const Passenger = sequelize.define('passenger', {
     id: {
       type: DataTypes.INTEGER,

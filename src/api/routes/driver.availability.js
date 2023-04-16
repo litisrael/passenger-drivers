@@ -4,10 +4,8 @@ export function driverAvailabilityRouter(DB) {
   const driverAvailabilityRouter = express.Router();
 
   driverAvailabilityRouter.post("/", async (req, res) => {
-    try {
-      const newAvailability = await DB.DriverAvailability.create(req.body, {
-        fields: ["occupied_from", "occupied_to"],
-      });
+        try {
+      const newAvailability = await DB.DriverAvailability.create(req.body);
       return res.json(newAvailability);
     } catch (error) {
       return res.status(500).json({

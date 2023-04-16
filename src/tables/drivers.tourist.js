@@ -1,15 +1,15 @@
-//import { connection } from "../database/conecction.js";
+
 import { DataTypes } from "sequelize";
 import { createDriverAvailability } from "./driver.availability.js";
 
-export const createDriver = async (sequelize) => {
+export const createDriver =  (sequelize) => {
   const Driver = sequelize.define(
     "Driver",
     {
       driver_id: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true
       },
       name: {
         type: DataTypes.STRING(45),
