@@ -1,4 +1,4 @@
-import { getConnection } from "../database/connection.js";
+import { getConnection } from "../database/conecction.js";
 import * as Tables from "./createTables.js";
 
 

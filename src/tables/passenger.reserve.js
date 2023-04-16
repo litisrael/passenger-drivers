@@ -21,7 +21,7 @@ const PassengerReservation = sequelize.define('reservation', {
       type: DataTypes.DOUBLE
     }
   },  {
-    tableName: "Passenger_reservation",
+    tableName: "passenger_reservation",
     timestamps: false,
     schema: "extended_travel",
   });

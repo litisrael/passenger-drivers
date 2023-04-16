@@ -10,8 +10,9 @@ export async function createTables(sequelize) {
   const PassengerReservation = await createPassengerReservation(sequelize);
   const DriverAvailability = await createDriverAvailability(sequelize);
 
-  Driver.hasMany(DriverAvailability, { foreignKey: "driver_id" });
-  DriverAvailability.belongsTo(Driver, { foreignKey: "driver_id" });
+  Driver.hasMany(DriverAvailability, { foreignKey: "driver_id", required: true });
+  DriverAvailability.belongsTo(Driver, { foreignKey: "driver_id", required: true });
+  
 
   Passenger.hasMany(PassengerReservation, { foreignKey: 'passenger_id' });
   PassengerReservation.belongsTo(Passenger, { foreignKey: 'passenger_id' });

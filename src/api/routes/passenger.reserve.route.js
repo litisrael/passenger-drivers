@@ -58,6 +58,7 @@ export function passengerReservationRouter(DB) {
 
       await reservation.update(req.body);
 
+     
       return res.json(reservation);
     } catch (error) {
       res.status(500).json({
