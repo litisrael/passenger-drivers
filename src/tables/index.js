@@ -7,5 +7,5 @@ export async function initDB() {
   const tables = await Tables.createTables(sequelize);
    sequelize.sync();
 
-  return tables;
+  return {tables, sequelize };
 }
