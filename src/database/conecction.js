@@ -5,11 +5,11 @@ import fs from 'fs';
 export const getConnection = async () => {
   const sequelize = new Sequelize({
     dialect: "postgres",
-    host: "localhost",
+    host: "transoprt.cdmpuxbiuunc.us-east-1.rds.amazonaws.com",
     port: 5432,
     database: "transportation",
     username: "postgres",
-    password: "01456",
+    password: "miramar21",
   });
 
   return await sequelize.authenticate()
