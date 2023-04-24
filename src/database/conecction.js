@@ -1,15 +1,17 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import { Sequelize } from "sequelize";
-import fs from 'fs';
+
 
 
 export const getConnection = async () => {
   const sequelize = new Sequelize({
     dialect: "postgres",
-    host: "transoprt.cdmpuxbiuunc.us-east-1.rds.amazonaws.com",
+    host: process.env.endpoint,
     port: 5432,
     database: "transportation",
     username: "postgres",
-    password: "miramar21",
+    password: process.env.password,
   });
 
   return await sequelize.authenticate()
