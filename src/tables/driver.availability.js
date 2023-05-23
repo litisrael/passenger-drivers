@@ -22,12 +22,12 @@ export  function createDriverAvailability(sequelize) {
     },
     {
       tableName: "driver_availability",
-    
+      timestamps: false,
     schema: "extended_travel",
     }
   );
 
-// await driverAvailability.sync({ force: true });
+//  driverAvailability.sync({ force: true });
 
   return driverAvailability;
 }

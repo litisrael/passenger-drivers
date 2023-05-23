@@ -1,7 +1,7 @@
 import { getConnection } from "../database/conecction.js";
 import { createPassenger } from "./passenger.js";
 import { createPassengerReservation } from "./passenger.reserve.js";
-import { createDriver } from "./drivers.tourist.js";
+import { createDriver } from "./drivers.js";
 import { createDriverAvailability } from "./driver.availability.js";
 import { queryDriversOfReserve } from "../api/query/reserve.drivers.js";
 
@@ -19,9 +19,14 @@ async function createTables(sequelize) {
     foreignKey: "driver_id",
     required: true,
   });
-
-  Passenger.hasMany(PassengerReservation, { foreignKey: "passenger_id" });
-  PassengerReservation.belongsTo(Passenger, { foreignKey: "passenger_id" });
+  Passenger.hasMany(PassengerReservation, { 
+    foreignKey: "passenger_id", required: true
+   });
+   
+  PassengerReservation.belongsTo(Passenger, { 
+    foreignKey: "passenger_id", required: true 
+  });
+  
 
   return {
     PassengerReservation,
@@ -30,11 +35,14 @@ async function createTables(sequelize) {
     DriverTours,
   };
 }
-
+/* hacer la sincornacion de tablas aca 
+porue sino las tablas no se reconectan
+*/
 export async function initDB() {
   const sequelize = await getConnection();
   const tables = await createTables(sequelize);
   sequelize.sync();
 
+ 
   return { tables, sequelize };
 }

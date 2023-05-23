@@ -9,7 +9,7 @@ export const getConnection = async () => {
     dialect: "postgres",
     host: process.env.endpoint,
     port: 5432,
-    database: "transportation",
+    database: "transoprt",
     username: "postgres",
     password: process.env.password,
   });

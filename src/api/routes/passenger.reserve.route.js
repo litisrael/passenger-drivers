@@ -1,10 +1,11 @@
 import express from "express";
 import { queryDriversOfReserve } from "../query/reserve.drivers.js";
 
-export function getDataFn() {
-  return dataFn;
-}
-let dataFn;
+// export async function getDataFn() {
+//   return await dataFn;
+// }
+let dataFromQuery;
+
 export function passengerReservationRouter(DB, sequelize = null) {
   const passengerReservationRouter = express.Router();
 
@@ -12,11 +13,11 @@ export function passengerReservationRouter(DB, sequelize = null) {
     try {
       const newReservation = await DB.PassengerReservation.create(req.body);
 
-      let idReserve = newReservation.dataValues.id;
+      const idReserve = newReservation.dataValues.id;
 
-      dataFn = await queryDriversOfReserve(sequelize, idReserve);
+      dataFromQuery = await queryDriversOfReserve(sequelize, idReserve);
 
-      return res.json(newReservation);
+      return res.json({newReservation ,  dataFromQuery});
     } catch (error) {
       res.status(500).json({
         message: error.message,
@@ -77,8 +78,10 @@ export function passengerReservationRouter(DB, sequelize = null) {
       }
 
       await reservation.update(req.body);
+      //  datafn es la funcion que hace el join
+       dataFromQuery = await queryDriversOfReserve(sequelize, reservation_id);
 
-      return res.json(reservation);
+      return res.json({reservation,  dataFromQuery});
     } catch (error) {
       res.status(500).json({
         message: error.message,

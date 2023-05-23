@@ -29,8 +29,8 @@ export function driverAvailabilityRouter(DB) {
     const { availability_id } = req.params;
 
     try {
-      const availability = await DB.DriverAvailability.findOne({
-        where: { id: availability_id },
+      const availability = await DB.DriverAvailability.findAll({
+        where: { driver_id: availability_id },
       });
 
       res.json(availability);

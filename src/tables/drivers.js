@@ -31,14 +31,24 @@ export const createDriver =  (sequelize) => {
         type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true,
       },
+      is_work_available_multiple_days: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+      },
+      work_zone: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true,
+        defaultValue: null,
+      },
     },
     {
       tableName: "drivers",
       timestamps: false,
       schema: "extended_travel",
     }
+    
   );
   
-
+  // sequelize.sync({force:true});
   return Driver;
 };
