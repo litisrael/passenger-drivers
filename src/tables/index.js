@@ -1,14 +1,14 @@
 import { getConnection } from "../database/conecction.js";
-import { createPassenger } from "./passenger.js";
-import { createPassengerReservation } from "./passenger.reserve.js";
-import { createDriver } from "./drivers.js";
-import { createDriverAvailability } from "./driver.availability.js";
+import { createPassenger } from "./passengers/passenger.js";
+import {  createPassengerReservationTourist } from "./passengers/passenger.reserve.tourist.js";
+import { createDriver } from "./drivers/drivers.js";
+import { createDriverAvailability } from "./drivers/driver.availability.js";
 import { queryDriversOfReserve } from "../api/query/reserve.drivers.js";
 
 async function createTables(sequelize) {
   const Passenger = await createPassenger(sequelize);
   const DriverTours = await createDriver(sequelize);
-  const PassengerReservation = await createPassengerReservation(sequelize);
+  const PassengerReservationTourist = await createPassengerReservationTourist(sequelize);
   const DriverAvailability = await createDriverAvailability(sequelize);
 
   DriverTours.hasMany(DriverAvailability, {
@@ -19,17 +19,17 @@ async function createTables(sequelize) {
     foreignKey: "driver_id",
     required: true,
   });
-  Passenger.hasMany(PassengerReservation, { 
+  Passenger.hasMany(PassengerReservationTourist, { 
     foreignKey: "passenger_id", required: true
    });
-   
-  PassengerReservation.belongsTo(Passenger, { 
+
+  PassengerReservationTourist.belongsTo(Passenger, { 
     foreignKey: "passenger_id", required: true 
   });
   
 
   return {
-    PassengerReservation,
+    PassengerReservation: PassengerReservationTourist,
     DriverAvailability,
     Passenger,
     DriverTours,

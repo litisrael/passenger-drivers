@@ -1,8 +1,8 @@
 import express from "express";
 import { queryDriversOfReserve } from "../query/reserve.drivers.js";
 
-// export async function getDataFn() {
-//   return await dataFn;
+// export async function getDataFromQuery() {
+//   return await dataFromQuery;
 // }
 let dataFromQuery;
 
