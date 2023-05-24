@@ -1,10 +1,10 @@
 
-import { passengerRouter } from "./passenger.routes.js";
+import { passengerRouter } from "./passengers/passenger.routes.js";
 import { initDB } from "../../tables/index.js";
-import { driverTourRouter  } from "./drivers.tour.routes.js";
-import { driverAvailabilityRouter } from "./driver.availability.js";
-import { passengerReservationRouter } from "./passenger.reserve.route.js";
- import { driverReservationRoute } from "./passenger.query.routes.js"
+import { driverTourRouter  } from "./drivers/drivers.routes.js";
+import { driverAvailabilityRouter } from "./drivers/driver.availability.js";
+import { passengerReservationRouter } from "./passengers/passenger.reserve.route.js";
+ import { driverReservationRoute } from "./passengers/passenger.query.routes.js"
 
 
 

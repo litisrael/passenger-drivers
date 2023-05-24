@@ -33,12 +33,13 @@ export const createDriver =  (sequelize) => {
       },
       is_work_available_multiple_days: {
         type: DataTypes.BOOLEAN,
-        allowNull: true,
+        allowNull: true, 
+        // defaultValue: true
       },
       work_zone: {
         type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true,
-        defaultValue: null,
+        
       },
     },
     {

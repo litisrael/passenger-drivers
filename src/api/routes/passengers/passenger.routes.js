@@ -5,7 +5,7 @@ export function passengerRouter(DB) {
 
   passengerRouter.post("/", async (req, res) => {
     try {
-      const newPassenger = await DB.Passenger.create(req.body);
+      const newPassenger = await DB.passengers.passenger.create(req.body);
       return res.json(newPassenger);
     } catch (error) {
       res.status(500).json({
@@ -16,7 +16,7 @@ export function passengerRouter(DB) {
 
   passengerRouter.get("/", async (req, res) => {
     try {
-      const passengers = await DB.Passenger.findAll({
+      const passengers = await DB.passengers.passenger.findAll({
         attributes: ["id", "name", "mail"]
       });
       return res.json(passengers);
@@ -31,7 +31,7 @@ export function passengerRouter(DB) {
     const { passenger_id } = req.params;
 
     try {
-      const passenger = await DB.Passenger.findByPk(passenger_id);
+      const passenger = await DB.passengers.passenger.findByPk(passenger_id);
       if (!passenger) {
         return res
           .status(404)
@@ -49,7 +49,7 @@ export function passengerRouter(DB) {
     const { passenger_id } = req.params;
 
     try {
-      const passenger = await DB.Passenger.findByPk(passenger_id);
+      const passenger = await DB.passengers.passenger.findByPk(passenger_id);
       if (!passenger) {
         return res
           .status(404)
@@ -70,7 +70,7 @@ export function passengerRouter(DB) {
     const { passenger_id } = req.params;
 
     try {
-      const passenger = await DB.Passenger.findByPk(passenger_id);
+      const passenger = await DB.passengers.passenger.findByPk(passenger_id);
       if (!passenger) {
         return res
           .status(404)

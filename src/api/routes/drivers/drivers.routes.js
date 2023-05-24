@@ -5,9 +5,9 @@ export function driverTourRouter(DB) {
     const driverRouter = express.Router();
     driverRouter.post("/", async (req, res) => {
       try {
-        const newDriver = await DB.DriverTours.create(req.body, {
-          fields: ["name", "mail", "cel", "number_of_passengers", "languages"],
-        });
+        const newDriver = await DB.drivers.driver.create(req.body
+          // , { fields: ["name", "mail", "cel", "number_of_passengers", "languages"],}
+        );
         return res.json(newDriver);
       } catch (error) {
         return res.status(500).json({
@@ -20,7 +20,7 @@ export function driverTourRouter(DB) {
 
   driverRouter.get("/", async (req, res) => {
     try {
-      const drivers = await DB.DriverTours.findAll();
+      const drivers = await DB.drivers.driver.findAll();
       return res.json(drivers);
     } catch (error) {
       res.status(500).json({
@@ -33,7 +33,7 @@ export function driverTourRouter(DB) {
     const { driver_id } = req.params;
 
     try {
-      const driver = await DB.DriverTours.findOne({
+      const driver = await DB.drivers.driver.findOne({
         where: { driver_id: driver_id },
       });
 
@@ -49,7 +49,7 @@ export function driverTourRouter(DB) {
     const { driver_id } = req.params;
 
     try {
-      const driver = await DB.DriverTours.findOne({
+      const driver = await DB.drivers.driver.findOne({
         where: { driver_id: driver_id },
       });
 
@@ -59,11 +59,13 @@ export function driverTourRouter(DB) {
         });
       }
 
-      await DB.DriverTours.destroy({
+      await DB.drivers.driver.destroy({
         where: { driver_id: driver_id },
       });
+      res.status(200).json({
+        message: "Successfully deleted",
+      });
 
-      res.sendStatus(204);
     } catch (error) {
       res.status(500).json({
         message: error.message,
@@ -74,9 +76,9 @@ export function driverTourRouter(DB) {
   driverRouter.put("/:driver_id", async (req, res) => {
     try {
       const { driver_id } = req.params;
-      const { name, mail, cel, number_of_passengers, languages } = req.body;
+      const { name, mail, cel, number_of_passengers, languages,is_work_available_multiple_days,work_zone } = req.body;
 
-      const driver = await DB.DriverTours.findByPk(driver_id);
+      const driver = await DB.drivers.driver.findByPk(driver_id);
       if (!driver) {
         return res
           .status(404)
@@ -87,6 +89,8 @@ export function driverTourRouter(DB) {
       driver.cel = cel;
       driver.number_of_passengers = number_of_passengers;
       driver.languages = languages;
+      driver.is_work_available_multiple_days= is_work_available_multiple_days
+      driver.work_zone = work_zone
       await driver.save();
 
       res.json(driver);

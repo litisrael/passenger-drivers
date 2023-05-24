@@ -1,5 +1,5 @@
 import express from "express";
-import { queryDriversOfReserve } from "../query/reserve.drivers.js";
+import { queryDriversOfReserve } from "../../query/reserve.drivers.js";
 
 // export async function getDataFromQuery() {
 //   return await dataFromQuery;
@@ -11,7 +11,7 @@ export function passengerReservationRouter(DB, sequelize = null) {
 
   passengerReservationRouter.post("/", async (req, res) => {
     try {
-      const newReservation = await DB.PassengerReservation.create(req.body);
+      const newReservation = await DB.passengers.passengerReservationTourist.create(req.body);
 
       const idReserve = newReservation.dataValues.id;
 
@@ -27,7 +27,7 @@ export function passengerReservationRouter(DB, sequelize = null) {
 
   passengerReservationRouter.get("/", async (req, res) => {
     try {
-      const reservations = await DB.PassengerReservation.findAll({
+      const reservations = await DB.passengers.passengerReservationTourist.findAll({
         attributes: [
           "id",
           "number_of_passengers",
@@ -48,7 +48,7 @@ export function passengerReservationRouter(DB, sequelize = null) {
     const { reservation_id } = req.params;
 
     try {
-      const reservation = await DB.PassengerReservation.findByPk(
+      const reservation = await DB.passengers.passengerReservationTourist.findByPk(
         reservation_id
       );
       if (!reservation) {
@@ -68,7 +68,7 @@ export function passengerReservationRouter(DB, sequelize = null) {
     const { reservation_id } = req.params;
 
     try {
-      const reservation = await DB.PassengerReservation.findByPk(
+      const reservation = await DB.passengers.passengerReservationTourist.findByPk(
         reservation_id
       );
       if (!reservation) {
@@ -93,7 +93,7 @@ export function passengerReservationRouter(DB, sequelize = null) {
     const { reservation_id } = req.params;
 
     try {
-      const reservation = await DB.PassengerReservation.findByPk(
+      const reservation = await DB.passengers.passengerReservationTourist.findByPk(
         reservation_id
       );
       if (!reservation) {
