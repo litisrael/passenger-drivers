@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 
-export const createPassengerReservationTourist =  (sequelize) => {
+export const createReservationTourist =  (sequelize) => {
 const PassengerReservation = sequelize.define('reservation', {
     id: {
       type: DataTypes.INTEGER,
@@ -9,12 +9,13 @@ const PassengerReservation = sequelize.define('reservation', {
       autoIncrement: true
     },
     number_of_passengers: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
-    start_day: {
+    from: {
       type: DataTypes.DATEONLY
     },
-    end_day: {
+    to: {
       type: DataTypes.DATEONLY
     },
     km_total: {

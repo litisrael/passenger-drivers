@@ -1,6 +1,6 @@
 import { getConnection } from "../database/conecction.js";
 import { createPassenger } from "./passengers/passenger.js";
-import {  createPassengerReservationTourist } from "./passengers/passenger.reserve.tourist.js";
+import {  createReservationTourist } from "./passengers/reserve.tourist.js";
 import { createDriver } from "./drivers/drivers.js";
 import { createDriverAvailability } from "./drivers/driver.availability.js";
 // import { queryDriversOfReserve } from "../api/query/reserve.drivers.js";
@@ -16,7 +16,7 @@ async function tablesDrivers(sequelize) {
     foreignKey: "driver_id",
     required: true,
   });
-   sequelize.sync();
+   sequelize.sync({force:true});
   return {
      driverAvailability,
     driver,
@@ -24,7 +24,7 @@ async function tablesDrivers(sequelize) {
 }
   async function tablesPassenger(sequelize) {
   const passenger = await createPassenger(sequelize);
-  const passengerReservationTourist = await createPassengerReservationTourist(sequelize);
+  const passengerReservationTourist = await createReservationTourist(sequelize);
 
   passenger.hasMany(passengerReservationTourist, { 
     foreignKey: "passenger_id", required: true
@@ -34,7 +34,7 @@ async function tablesDrivers(sequelize) {
     foreignKey: "passenger_id", required: true 
   });
 
-sequelize.sync();
+  sequelize.sync({force:true});
   return {
      passengerReservationTourist,
      passenger,

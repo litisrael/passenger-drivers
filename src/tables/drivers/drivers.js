@@ -37,9 +37,8 @@ export const createDriver =  (sequelize) => {
         // defaultValue: true
       },
       work_zone: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.ARRAY(DataTypes.ENUM("1","2","3","4","5","6","7","8")),
         allowNull: true,
-        
       },
     },
     {

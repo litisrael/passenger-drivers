@@ -9,11 +9,11 @@ const Passenger = sequelize.define('passenger', {
     },
     name: {
       type: DataTypes.STRING(45),
-      allowNull: false
+      allowNull: true,
     },
     mail: {
       type: DataTypes.STRING(45),
-      allowNull: false
+      allowNull: true,
     },
     phone: {
       type: DataTypes.STRING(20),
