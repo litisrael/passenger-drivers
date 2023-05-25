@@ -13,11 +13,11 @@ const ReservationOneWay = sequelize.define('reservation', {
       allowNull: true,
     },
     from: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.STRING(100),
         allowNull: true,
     },
     to: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.STRING(100),
         allowNull: true,
     },
     date: {

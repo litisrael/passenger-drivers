@@ -28,7 +28,7 @@ export const createDriver =  (sequelize) => {
         allowNull: true,
       },
       languages: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.ARRAY(DataTypes.STRING(30)),
         allowNull: true,
       },
       is_work_available_multiple_days: {
