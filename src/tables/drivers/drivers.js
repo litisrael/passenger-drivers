@@ -14,14 +14,17 @@ export const createDriver =  (sequelize) => {
       name: {
         type: DataTypes.STRING(45),
         allowNull: false,
+        validate:{ is: /^[a-z]+$/i},
       },
       mail: {
         type: DataTypes.STRING(45),
         allowNull: false,
+        validate: { isEmail: true},  
       },
       cel: {
         type: DataTypes.STRING(20),
         allowNull: false,
+        validate: {isNumeric: true},
       },
       number_of_passengers: {
         type: DataTypes.INTEGER,
@@ -48,6 +51,7 @@ export const createDriver =  (sequelize) => {
     }
     
   );
+
   
   // sequelize.sync({force:true});
   return Driver;

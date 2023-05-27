@@ -1,8 +1,7 @@
 import { DataTypes } from "sequelize";
-import { isValidDate } from "../utilis.js";
-const nextYear = new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).toISOString().split("T")[0];
-const currentDate = new Date().toISOString().split("T")[0]
-let start_day = null
+import { validateReservation, nextYear ,currentDate } from "../utilis.js";
+
+
 export const createReservationTourist =  (sequelize) => {
 const PassengerReservation = sequelize.define('reservation', {
     id: {
@@ -16,16 +15,11 @@ const PassengerReservation = sequelize.define('reservation', {
     },
     start_day: {
       type: DataTypes.DATEONLY,
-      validate: {
-        isAfter: currentDate,
-      }
+      validate: { isAfter: currentDate},
       },
     end_day: {
       type: DataTypes.DATEONLY,
-      validate: {
-        
-        isBefore: nextYear 
-      }
+      validate: {isBefore: nextYear}
     },
     km_total: {
       type: DataTypes.DOUBLE
@@ -35,15 +29,12 @@ const PassengerReservation = sequelize.define('reservation', {
     timestamps: false,
     schema: "extended_travel",
   });
-  PassengerReservation.beforeCreate((model, event) => {
-    if (model.start_day > model.end_day) {
-    throw new Error("The start date must be before the end date.");
-    }
+  PassengerReservation.beforeCreate((model ) => {
+    validateReservation(model.start_day, model.end_day);
     });
-    PassengerReservation.beforeUpdate((model, event) => {
-      if (model.start_day > model.end_day) {
-      throw new Error("The start date must be before the end date.");
-      }
+
+    PassengerReservation.beforeUpdate((model) => {
+      validateReservation(model.start_day, model.end_day);
       });
   return PassengerReservation
 }

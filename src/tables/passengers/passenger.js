@@ -24,8 +24,7 @@ const Passenger = sequelize.define('passenger', {
     tableName: "passenger",
     timestamps: false,
     schema: "extended_travel",
-  },
-  )
+  },)
   // sequelize.sync({force:true});;
   return Passenger
 }

@@ -27,15 +27,9 @@ export function passengerReservationRouter(DB, sequelize = null) {
 
   passengerReservationRouter.get("/", async (req, res) => {
     try {
-      const reservations = await DB.passengers.passengerReservationTourist.findAll({
-        attributes: [
-          "id",
-          "number_of_passengers",
-          "start_day",
-          "end_day",
-          "km_total",
-        ],
-      });
+      const reservations = await DB.passengers.passengerReservationTourist.findAll(
+       
+      );
       return res.json(reservations);
     } catch (error) {
       res.status(500).json({

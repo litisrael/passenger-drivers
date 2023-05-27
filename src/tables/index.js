@@ -3,11 +3,22 @@ import { createPassenger } from "./passengers/passenger.js";
 import {  createReservationTourist } from "./passengers/reserve.tourist.js";
 import { createDriver } from "./drivers/drivers.js";
 import { createDriverAvailability } from "./drivers/driver.availability.js";
+import { createVehicle } from "./drivers/vehicles.js";
 // import { queryDriversOfReserve } from "../api/query/reserve.drivers.js";
 
 async function tablesDrivers(sequelize) {
   const driver = await createDriver(sequelize);
   const driverAvailability = await createDriverAvailability(sequelize);
+  const vehicle = createVehicle(sequelize)
+   
+  driver.hasMany(vehicle, {
+    foreignKey: "driver_id",
+    required: true,
+  });
+  vehicle.belongsTo(driver, {
+    foreignKey: "driver_id",
+    required: true,
+  });
   driver.hasMany(driverAvailability, {
     foreignKey: "driver_id",
     required: true,
@@ -22,6 +33,7 @@ async function tablesDrivers(sequelize) {
     driver,
   };
 }
+
   async function tablesPassenger(sequelize) {
   const passenger = await createPassenger(sequelize);
   const passengerReservationTourist = await createReservationTourist(sequelize);

@@ -1,5 +1,6 @@
 
 import { DataTypes } from "sequelize";
+import { validateReservation, nextYear ,currentDate } from "../utilis.js";
 
 export  function createDriverAvailability(sequelize) {
   const driverAvailability = sequelize.define(
@@ -14,19 +15,27 @@ export  function createDriverAvailability(sequelize) {
       occupied_from: {
         type: DataTypes.DATEONLY,
         allowNull: true,
+        validate: { isAfter: currentDate},
       },
       occupied_to: {
         type: DataTypes.DATEONLY,
         allowNull: true,
+        validate: {isBefore: nextYear}
       },
     },
     {
       tableName: "driver_availability",
       timestamps: false,
     schema: "extended_travel",
-    }
-  );
+    } );
 
+    driverAvailability.beforeCreate((model) => {
+      validateReservation(model.occupied_from,model.occupied_to);
+      });
+      driverAvailability.beforeUpdate((model) => {
+        validateReservation(model.occupied_from,model.occupied_to);
+        });
+    
 //  driverAvailability.sync({ force: true });
 
   return driverAvailability;
