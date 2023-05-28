@@ -9,7 +9,7 @@ import { createVehicle } from "./drivers/vehicles.js";
 async function tablesDrivers(sequelize) {
   const driver = await createDriver(sequelize);
   const driverAvailability = await createDriverAvailability(sequelize);
-  const vehicle = createVehicle(sequelize)
+  const vehicle = await createVehicle(sequelize)
    
   driver.hasMany(vehicle, {
     foreignKey: "driver_id",
@@ -27,10 +27,12 @@ async function tablesDrivers(sequelize) {
     foreignKey: "driver_id",
     required: true,
   });
-   sequelize.sync();
+
+  //  sequelize.sync({ alter: true });
   return {
      driverAvailability,
     driver,
+    vehicle
   };
 }
 
@@ -45,7 +47,7 @@ async function tablesDrivers(sequelize) {
   passengerReservationTourist.belongsTo(passenger, { 
     foreignKey: "passenger_id", required: true 
   });
-
+  // sequelize.sync({ alter: true });
  
   return {
      passengerReservationTourist,
@@ -64,4 +66,5 @@ export async function initDB() {
   const tables = await createTables(sequelize);
   sequelize.sync();
   return { tables, sequelize };
+
 }

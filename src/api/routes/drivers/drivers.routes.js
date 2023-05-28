@@ -84,14 +84,16 @@ export function driverTourRouter(DB) {
           .status(404)
           .json({ message: `Driver with id ${driver_id} not found` });
       }
-      driver.name = name;
-      driver.mail = mail;
-      driver.cel = cel;
-      driver.number_of_passengers = number_of_passengers;
-      driver.languages = languages;
-      driver.is_work_available_multiple_days= is_work_available_multiple_days
-      driver.work_zone = work_zone
-      await driver.save();
+     
+      await driver.update(req.body);
+      // driver.name = name;
+      // driver.mail = mail;
+      // driver.cel = cel;
+      // driver.number_of_passengers = number_of_passengers;
+      // driver.languages = languages;
+      // driver.is_work_available_multiple_days= is_work_available_multiple_days
+      // driver.work_zone = work_zone
+      // await driver.save();
 
       res.json(driver);
     } catch (error) {

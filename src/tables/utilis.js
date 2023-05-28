@@ -5,7 +5,7 @@
 //     }
 //   }
 
-  export function validateReservation(date1, date2) {
+  export  function validateReservation (date1, date2) {
     if (date1> date2) {
       throw new Error("The start date must be before the end date.");
     }

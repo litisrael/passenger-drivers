@@ -11,25 +11,22 @@ export const createDriver =  (sequelize) => {
         primaryKey: true,
         autoIncrement: true
       },
-      name: {
+      driver_name: {
         type: DataTypes.STRING(45),
         allowNull: false,
-        validate:{ is: /^[a-z]+$/i},
+        validate:{ is: /^[a-zA-Z\s]+$/},
       },
-      mail: {
+      driver_mail: {
         type: DataTypes.STRING(45),
         allowNull: false,
         validate: { isEmail: true},  
       },
-      cel: {
+      driver_cell: {
         type: DataTypes.STRING(20),
         allowNull: false,
         validate: {isNumeric: true},
       },
-      number_of_passengers: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
+
       languages: {
         type: DataTypes.ARRAY(DataTypes.STRING(30)),
         allowNull: true,
@@ -39,8 +36,21 @@ export const createDriver =  (sequelize) => {
         allowNull: true, 
         // defaultValue: true
       },
+      shomer_shabat: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true, 
+        // defaultValue: true
+      },
       work_zone: {
-        type: DataTypes.ARRAY(DataTypes.ENUM("1","2","3","4","5","6","7","8")),
+        type: DataTypes.ARRAY(DataTypes.ENUM(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'])),
+        allowNull: true,
+      },
+      // waiting_time_rate: {
+      //   type: DataTypes.DECIMAL(5, 2),
+      //   allowNull: true,
+      // },
+      overtime_price:{ 
+        type: DataTypes.DECIMAL(5, 2),
         allowNull: true,
       },
     },
@@ -53,6 +63,6 @@ export const createDriver =  (sequelize) => {
   );
 
   
-  // sequelize.sync({force:true});
+  // sequelize.sync({force:true})
   return Driver;
 };

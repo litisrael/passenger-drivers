@@ -7,17 +7,17 @@ const Passenger = sequelize.define('passenger', {
       primaryKey: true,
       autoIncrement: true
     },
-    name: {
+    Passenger_name: {
       type: DataTypes.STRING(45),
-      allowNull: true,
+      allowNull: false,
     },
-    mail: {
+   Passenger_mail: {
       type: DataTypes.STRING(45),
-      allowNull: true,
+      allowNull: false,
     },
-    phone: {
+    Passenger_cell: {
       type: DataTypes.STRING(20),
-      allowNull: true
+      allowNull: false
     }
     
   },  {

@@ -70,7 +70,6 @@ export function driverAvailabilityRouter(DB) {
   driverAvailabilityRouter.put("/:availability_id", async (req, res) => {
     try {
       const { availability_id } = req.params;
-      const { occupied_from, occupied_to } = req.body;
 
       const availability = await DB.drivers.driverAvailability.findByPk(
         availability_id
@@ -80,9 +79,9 @@ export function driverAvailabilityRouter(DB) {
           message: `Availability with id ${availability_id} not found`,
         });
       }
+   
+      await availability.update(req.body);
 
-      availability.occupied_from = occupied_from;
-      availability.occupied_to = occupied_to;
 
       await availability.save();
 

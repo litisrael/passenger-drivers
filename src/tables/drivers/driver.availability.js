@@ -12,12 +12,12 @@ export  function createDriverAvailability(sequelize) {
         autoIncrement: true
       },
 
-      occupied_from: {
+      available_from: {
         type: DataTypes.DATEONLY,
         allowNull: true,
         validate: { isAfter: currentDate},
       },
-      occupied_to: {
+      available_to: {
         type: DataTypes.DATEONLY,
         allowNull: true,
         validate: {isBefore: nextYear}
@@ -30,10 +30,10 @@ export  function createDriverAvailability(sequelize) {
     } );
 
     driverAvailability.beforeCreate((model) => {
-      validateReservation(model.occupied_from,model.occupied_to);
+      validateReservation(model.available_from,model.available_to);
       });
       driverAvailability.beforeUpdate((model) => {
-        validateReservation(model.occupied_from,model.occupied_to);
+        validateReservation(model.available_from,model.available_to);
         });
     
 //  driverAvailability.sync({ force: true });

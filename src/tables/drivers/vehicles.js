@@ -10,7 +10,7 @@ export const createVehicle =  (sequelize) => {
           autoIncrement: true
         },
        
-        number_of_passengers: {
+        number_of_seats: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },

@@ -16,9 +16,9 @@ export function passengerRouter(DB) {
 
   passengerRouter.get("/", async (req, res) => {
     try {
-      const passengers = await DB.passengers.passenger.findAll({
-        attributes: ["id", "name", "mail"]
-      });
+      const passengers = await DB.passengers.passenger.findAll(
+        // {attributes: ["id", "name", "mail"] }
+      );
       return res.json(passengers);
     } catch (error) {
       res.status(500).json({
