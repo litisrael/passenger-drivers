@@ -76,7 +76,7 @@ export function driverTourRouter(DB) {
   driverRouter.put("/:driver_id", async (req, res) => {
     try {
       const { driver_id } = req.params;
-      const { name, mail, cel, number_of_passengers, languages,is_work_available_multiple_days,work_zone } = req.body;
+      // const { name, mail, cel, number_of_passengers, languages,is_work_available_multiple_days,work_zone } = req.body;
 
       const driver = await DB.drivers.driver.findByPk(driver_id);
       if (!driver) {

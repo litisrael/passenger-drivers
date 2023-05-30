@@ -5,9 +5,15 @@
 //     }
 //   }
 
-  export  function validateReservation (date1, date2) {
-    if (date1> date2) {
+  export  function validate2Dates (date1, date2) {
+    if (date1 > date2) {
       throw new Error("The start date must be before the end date.");
+    }
+  }
+
+  export  function validateAfterCurrentDate (date) {
+    if (date < currentDate()) {
+      throw new Error("The date must be after current date.");
     }
   }
 

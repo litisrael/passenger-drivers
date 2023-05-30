@@ -1,10 +1,10 @@
 import express from "express";
-import { queryDriversOfReserve } from "../../query/reserve.drivers.js";
+import { queryDriversOfReserve } from "../../quey.route/reserve.drivers.js";
 
 // export async function getDataFromQuery() {
 //   return await dataFromQuery;
 // }
-let dataFromQuery;
+let dataFromQueryRoute;
 
 export function passengerReservationRouter(DB, sequelize = null) {
   const passengerReservationRouter = express.Router();
@@ -13,11 +13,11 @@ export function passengerReservationRouter(DB, sequelize = null) {
     try {
       const newReservation = await DB.passengers.passengerReservationTourist.create(req.body);
 
-      const idReserve = newReservation.dataValues.id;
+      // const idReserve = newReservation.dataValues.id;
 
-      dataFromQuery = await queryDriversOfReserve(sequelize, idReserve);
+      // dataFromQuery = await queryDriversOfReserve(sequelize, idReserve);
 
-      return res.json({newReservation ,  dataFromQuery});
+      return res.json({newReservation ,  dataFromQuery: dataFromQueryRoute});
     } catch (error) {
       res.status(500).json({
         message: error.message,
@@ -73,9 +73,9 @@ export function passengerReservationRouter(DB, sequelize = null) {
 
       await reservation.update(req.body);
       //  datafn es la funcion que hace el join
-       dataFromQuery = await queryDriversOfReserve(sequelize, reservation_id);
+      //  dataFromQuery = await queryDriversOfReserve(sequelize, reservation_id);
 
-      return res.json({reservation,  dataFromQuery});
+      return res.json({reservation,  dataFromQuery: dataFromQueryRoute});
     } catch (error) {
       res.status(500).json({
         message: error.message,

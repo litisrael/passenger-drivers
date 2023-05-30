@@ -6,12 +6,12 @@ import { Sequelize } from "sequelize";
 
 export const getConnection = async () => {
   const sequelize = new Sequelize({
-    dialect: "postgres",
-    host: process.env.endpoint,
-    port: 5432,
+    dialect: process.env.db_dialect ,
+    host: process.env.db_localhost,
+    port: process.env.db_port,
     database: "transoprt",
-    username: "postgres",
-    password: process.env.password,
+    username: process.env.db_user,
+    password: process.env.db_password_local,
   });
 
   return await sequelize.authenticate()

@@ -48,13 +48,13 @@ async function tablesDrivers(sequelize) {
     foreignKey: "passenger_id", required: true 
   });
   // sequelize.sync({ alter: true });
- 
+  // para que no puedan update las fk 
+  // passengerReservationTourist.freezeForeignKey("passenger_id");
   return {
      passengerReservationTourist,
      passenger,
   };
 }
-
 async function createTables(sequelize) {
  const drivers = await tablesDrivers(sequelize)
  const passengers = await tablesPassenger(sequelize)

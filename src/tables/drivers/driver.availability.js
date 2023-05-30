@@ -1,6 +1,6 @@
 
 import { DataTypes } from "sequelize";
-import { validateReservation, nextYear ,currentDate } from "../utilis.js";
+import { validate2Dates, nextYear ,currentDate,validateAfterCurrentDate } from "../utility.js";
 
 export  function createDriverAvailability(sequelize) {
   const driverAvailability = sequelize.define(
@@ -30,10 +30,11 @@ export  function createDriverAvailability(sequelize) {
     } );
 
     driverAvailability.beforeCreate((model) => {
-      validateReservation(model.available_from,model.available_to);
+      validate2Dates(model.available_from,model.available_to);
       });
       driverAvailability.beforeUpdate((model) => {
-        validateReservation(model.available_from,model.available_to);
+        validateAfterCurrentDate(model.available_from)
+        validate2Dates(model.available_from,model.available_to);
         });
     
 //  driverAvailability.sync({ force: true });

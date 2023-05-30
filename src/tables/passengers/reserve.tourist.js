@@ -1,6 +1,8 @@
 import { DataTypes } from "sequelize";
-import { validateReservation, nextYear, currentDate } from "../utilis.js";
+import { validate2Dates, nextYear, currentDate, validateAfterCurrentDate } from "../utility.js";
+import { queryAvailableDriversForTrip } from "../query/available_drivers.js";
 
+let DriversForTrip;
 export const createReservationTourist = (sequelize) => {
   const PassengerReservation = sequelize.define(
     "reservation",
@@ -33,13 +35,22 @@ export const createReservationTourist = (sequelize) => {
     }
   );
   PassengerReservation.beforeCreate((model) => {
-    validateReservation(model.start_day, model.end_day);
+    validate2Dates(model.start_day, model.end_day);
   });
 
   PassengerReservation.beforeUpdate((model) => {
-    validateReservation(model.start_day, model.end_day);
+    validateAfterCurrentDate(model.start_day);
+    validate2Dates(model.start_day, model.end_day);
   });
-   PassengerReservation.afterCreate(() =>console.log( "argentina camepeos")) 
-  // PassengerReservation.afterUpdate( console.log( "argentina jua camepeos")) 
+
+  PassengerReservation.afterCreate( (model) => {
+     DriversForTrip =   queryAvailableDriversForTrip(sequelize , model.id)
+  })
+  PassengerReservation.afterUpdate( (model) => {
+    DriversForTrip =   queryAvailableDriversForTrip(sequelize , model.id)
+  
+ })
   return PassengerReservation;
 };
+
+// console.log("soy el console",DriversForTrip)

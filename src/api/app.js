@@ -8,12 +8,13 @@ export const initRouterDriver = async () => {
   //  midelwer
   // app.use(morgan("dev"))
   app.use(express.json());
-
-  app.use("/drivers", routers.driverTour);
+  
+  app.use("/drivers", routers.driver);
+  app.use("/vehicles", routers.vehicles);
   app.use("/driverAvailability", routers.driverAvailability);
+  
   app.use("/passenger", routers.passenger);
   app.use("/passengerReserve", routers.passengerReservation);
-  app.use("/passengerquery", routers.driverReservation);
 
   return app;
 };
