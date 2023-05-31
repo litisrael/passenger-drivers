@@ -31,7 +31,7 @@ export function vehicleRouter(DB) {
 
     try {
       const vehicle = await  DB.drivers.vehicle.findAll({
-        where: { driver_id: vehicle_id }
+        where: { company_id: vehicle_id }
       });
     
       if (!vehicle) {

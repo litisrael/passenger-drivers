@@ -2,31 +2,36 @@
 export async function queryAvailableDriversForTrip(sequelize, id) {
     try {
         const results = await sequelize.query(`
-        SELECT DISTINCT
-          p.passenger_name,
-          p.passenger_mail,
-          p.passenger_cell,
-          pr.number_of_passengers,
-          pr.start_day,
-          pr.end_day,
-          da.available_from, 
-          da.available_to,
-          d.driver_name,
-          d.driver_mail,
-          v.number_of_seats
-        FROM
-          extended_travel.passenger p
-          LEFT JOIN extended_travel.passenger_reservation pr ON pr.passenger_id = p.id
-          LEFT JOIN extended_travel.drivers d ON pr.number_of_passengers <= (
-            SELECT number_of_seats FROM extended_travel.vehicles WHERE driver_id = d.driver_id
-          )
-          LEFT JOIN extended_travel.driver_availability da ON d.driver_id = da.driver_id
-          LEFT JOIN extended_travel.vehicles v ON v.driver_id = d.driver_id
+        select   DISTINCT
+            p.passenger_name,
+            p.passenger_mail,
+            p.passenger_cell,
+            pr.number_of_passengers,
+          v.number_of_seats,
+            pr.start_day,
+            pr.end_day,
+            vat.available_from, 
+            vat.available_to ,
+            c.company_name,
+            c.company_mail
+            
+           
+        
+        FROM extended_travel.passenger p
+        LEFT JOIN extended_travel.passenger_reservation pr ON pr.passenger_id = p.id
+          LEFT JOIN extended_travel.vehicles v  ON pr.number_of_passengers <= (
+                SELECT  number_of_seats FROM extended_travel.vehicles WHERE vehicle_id = v.vehicle_id
+            )
+        
+        LEFT JOIN extended_travel.vehicle_availability_tourist vat ON vat.vehicle_id = v.vehicle_id
+        LEFT JOIN extended_travel.company c ON c.company_id = v.company_id
         WHERE
-          (da.driver_id IS NULL OR pr.id IS NOT NULL)
-          AND d.is_work_available_multiple_days = true
-          AND (pr.start_day > da.available_from OR da.available_from IS NULL)
-          AND (pr.end_day < da.available_to OR da.available_to IS NULL)
+             c.is_work_available_multiple_days = true
+            AND (pr.start_day > vat.available_from  )
+            AND (pr.end_day < vat.available_to )
+          
+          
+          
           AND pr.id = ${id};
       `);
       

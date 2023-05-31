@@ -9,9 +9,9 @@ export const initRouterDriver = async () => {
   // app.use(morgan("dev"))
   app.use(express.json());
   
-  app.use("/drivers", routers.driver);
+  app.use("/company", routers.company);
   app.use("/vehicles", routers.vehicles);
-  app.use("/driverAvailability", routers.driverAvailability);
+  app.use("/availabilitytourist", routers.vehiclesAvailabilityTourist);
   
   app.use("/passenger", routers.passenger);
   app.use("/passengerReserve", routers.passengerReservation);

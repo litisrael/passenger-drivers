@@ -1,11 +1,11 @@
 import express from "express";
 
-export function driverAvailabilityRouter(DB) {
-  const driverAvailabilityRouter = express.Router();
+export function vehiclesAvailabilityTouristRouter(DB) {
+  const vehiclesAvailabilityTouristRouter = express.Router();
 
-  driverAvailabilityRouter.post("/", async (req, res) => {
+  vehiclesAvailabilityTouristRouter.post("/", async (req, res) => {
         try {
-      const newAvailability = await DB.drivers.driverAvailability.create(req.body);
+      const newAvailability = await DB.drivers.vehiclesAvailabilityTourist.create(req.body);
       return res.json(newAvailability);
     } catch (error) {
       return res.status(500).json({
@@ -14,9 +14,9 @@ export function driverAvailabilityRouter(DB) {
     }
   });
 
-  driverAvailabilityRouter.get("/", async (req, res) => {
+  vehiclesAvailabilityTouristRouter.get("/", async (req, res) => {
     try {
-      const availabilities = await DB.drivers.driverAvailability.findAll();
+      const availabilities = await DB.drivers.vehiclesAvailabilityTourist.findAll();
       return res.json(availabilities);
     } catch (error) {
       res.status(500).json({
@@ -25,12 +25,12 @@ export function driverAvailabilityRouter(DB) {
     }
   });
 
-  driverAvailabilityRouter.get("/:availability_id", async (req, res) => {
+  vehiclesAvailabilityTouristRouter.get("/:availability_id", async (req, res) => {
     const { availability_id } = req.params;
 
     try {
-      const availability = await DB.drivers.driverAvailability.findAll({
-        where: { driver_id: availability_id },
+      const availability = await DB.drivers.vehiclesAvailabilityTourist.findAll({
+        where: { vehicle_id: availability_id },
       });
 
       res.json(availability);
@@ -41,13 +41,11 @@ export function driverAvailabilityRouter(DB) {
     }
   });
 
-  driverAvailabilityRouter.delete("/:availability_id", async (req, res) => {
+  vehiclesAvailabilityTouristRouter.delete("/:availability_id", async (req, res) => {
     const { availability_id } = req.params;
-
+ 
     try {
-      const availability = await DB.drivers.driverAvailability.findOne({
-        where: { id: availability_id },
-      });
+      const availability  = await DB.drivers.vehiclesAvailabilityTourist.findByPk(availability_id);
 
       if (!availability) {
         return res.status(404).json({
@@ -55,9 +53,7 @@ export function driverAvailabilityRouter(DB) {
         });
       }
 
-      await DB.drivers.driverAvailability.destroy({
-        where: { id: availability_id },
-      });
+     await  availability.destroy();
 
       res.sendStatus(204);
     } catch (error) {
@@ -67,13 +63,11 @@ export function driverAvailabilityRouter(DB) {
     }
   });
 
-  driverAvailabilityRouter.put("/:availability_id", async (req, res) => {
+  vehiclesAvailabilityTouristRouter.put("/:availability_id", async (req, res) => {
     try {
+      
       const { availability_id } = req.params;
-
-      const availability = await DB.drivers.driverAvailability.findByPk(
-        availability_id
-      );
+      const availability = await DB.drivers.vehiclesAvailabilityTourist.findByPk(  availability_id  );
       if (!availability) {
         return res.status(404).json({
           message: `Availability with id ${availability_id} not found`,
@@ -83,7 +77,7 @@ export function driverAvailabilityRouter(DB) {
       await availability.update(req.body);
 
 
-      await availability.save();
+      // await availability.save();
 
       res.json(availability);
     } catch (error) {
@@ -91,5 +85,5 @@ export function driverAvailabilityRouter(DB) {
     }
   });
 
-  return driverAvailabilityRouter;
+  return vehiclesAvailabilityTouristRouter;
 }

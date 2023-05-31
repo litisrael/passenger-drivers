@@ -1,9 +1,10 @@
 
 import { DataTypes } from "sequelize";
-import { validate2Dates, nextYear ,currentDate,validateAfterCurrentDate } from "../utility.js";
+import { validate2Dates, nextYear ,currentDate,validateAfterCurrentDate,
+validateDateNotBetweenExisting} from "../utility.js";
 
-export  function createDriverAvailability(sequelize) {
-  const driverAvailability = sequelize.define(
+export  function createVehicleAvailabilityTourist(sequelize) {
+  const vehicleAvailability = sequelize.define(
     "availability",
     {
       id: {
@@ -14,30 +15,33 @@ export  function createDriverAvailability(sequelize) {
 
       available_from: {
         type: DataTypes.DATEONLY,
-        allowNull: true,
+        allowNull: false,
         validate: { isAfter: currentDate},
       },
       available_to: {
         type: DataTypes.DATEONLY,
-        allowNull: true,
+        allowNull: false,
         validate: {isBefore: nextYear}
       },
     },
     {
-      tableName: "driver_availability",
+      tableName: "vehicle_availability_tourist",
       timestamps: false,
     schema: "extended_travel",
     } );
 
-    driverAvailability.beforeCreate((model) => {
+    vehicleAvailability.beforeCreate(async(model) => {
       validate2Dates(model.available_from,model.available_to);
-      });
-      driverAvailability.beforeUpdate((model) => {
+      // await validateDateNotBetweenExisting('vehicle_availability_tourist', 'fkColumnName', 'available_from', 'available_to', model.available_from);
+     
+}
+      );
+      vehicleAvailability.beforeUpdate((model) => {
         validateAfterCurrentDate(model.available_from)
         validate2Dates(model.available_from,model.available_to);
         });
     
 //  driverAvailability.sync({ force: true });
 
-  return driverAvailability;
+  return vehicleAvailability;
 }

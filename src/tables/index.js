@@ -1,37 +1,43 @@
 import { getConnection } from "../database/conecction.js";
 import { createPassenger } from "./passengers/passenger.js";
 import {  createReservationTourist } from "./passengers/reserve.tourist.js";
-import { createDriver } from "./drivers/drivers.js";
-import { createDriverAvailability } from "./drivers/driver.availability.js";
+import { createCompany } from "./drivers/company.js";
+import { createVehicleAvailabilityTourist } from "./drivers/vehicles.availability.tourist.js";
 import { createVehicle } from "./drivers/vehicles.js";
 // import { queryDriversOfReserve } from "../api/query/reserve.drivers.js";
 
 async function tablesDrivers(sequelize) {
-  const driver = await createDriver(sequelize);
-  const driverAvailability = await createDriverAvailability(sequelize);
+  const company = await createCompany(sequelize);
+  const vehiclesAvailabilityTourist = await createVehicleAvailabilityTourist(sequelize);
   const vehicle = await createVehicle(sequelize)
    
-  driver.hasMany(vehicle, {
-    foreignKey: "driver_id",
-    required: true,
+
+  company.hasMany(vehicle, {
+    foreignKey: {
+      name:  "company_id",
+    // required: true,
+    allowNull: false,}
   });
-  vehicle.belongsTo(driver, {
-    foreignKey: "driver_id",
-    required: true,
+  vehicle.belongsTo(company, {
+    foreignKey:{   name: "company_id",
+    // required: false,
+    allowNull: false,}
   });
-  driver.hasMany(driverAvailability, {
-    foreignKey: "driver_id",
-    required: true,
+  vehicle.hasMany(vehiclesAvailabilityTourist, {
+    foreignKey:{   name: "vehicle_id",
+    // required: true,
+    allowNull: false,}
   });
-  driverAvailability.belongsTo(driver, {
-    foreignKey: "driver_id",
-    required: true,
+  vehiclesAvailabilityTourist.belongsTo(vehicle, {
+    foreignKey:{   name: "vehicle_id",
+    // required: true,
+    allowNull: false,}
   });
 
-  //  sequelize.sync({ alter: true });
+ 
   return {
-     driverAvailability,
-    driver,
+    vehiclesAvailabilityTourist,
+    company,
     vehicle
   };
 }
@@ -41,11 +47,12 @@ async function tablesDrivers(sequelize) {
   const passengerReservationTourist = await createReservationTourist(sequelize);
 
   passenger.hasMany(passengerReservationTourist, { 
-    foreignKey: "passenger_id", required: true
+    foreignKey: {   name:
+    "passenger_id", required: true, allowNull: false,}
    });
 
   passengerReservationTourist.belongsTo(passenger, { 
-    foreignKey: "passenger_id", required: true 
+    foreignKey: {  name: "passenger_id", required: true ,allowNull: false,}
   });
   // sequelize.sync({ alter: true });
   // para que no puedan update las fk 
@@ -64,7 +71,7 @@ return {drivers,passengers}
 export async function initDB() {
   const sequelize = await getConnection();
   const tables = await createTables(sequelize);
-  sequelize.sync();
+   sequelize.sync();
   return { tables, sequelize };
 
 }

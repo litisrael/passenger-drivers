@@ -22,6 +22,14 @@ export const createVehicle =  (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: true,
           },
+            // waiting_time_rate: {
+      //   type: DataTypes.DECIMAL(5, 2),
+      //   allowNull: true,
+      // },
+      overtime_price:{ 
+        type: DataTypes.DECIMAL(5, 2),
+        allowNull: true,
+      },
       },
       {
         tableName: "vehicles",
