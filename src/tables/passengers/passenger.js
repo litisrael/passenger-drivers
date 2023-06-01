@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 export const createPassenger =  (sequelize) => {
-const Passenger = sequelize.define('passenger', {
+const Passenger = sequelize.define('Passenger', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,

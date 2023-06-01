@@ -5,7 +5,7 @@ import { queryAvailableDriversForTrip } from "../query/available_drivers.js";
 let DriversForTrip;
 export const createReservationTourist = (sequelize) => {
   const PassengerReservation = sequelize.define(
-    "reservation",
+    "PassengerReservation",
     {
       id: {
         type: DataTypes.INTEGER,

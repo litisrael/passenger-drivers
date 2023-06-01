@@ -13,14 +13,22 @@ export const createVehicle =  (sequelize) => {
         number_of_seats: {
           type: DataTypes.INTEGER,
           allowNull: false,
+          validate : {max: 65, min: 7, }
         },
+        // mispar_rishion: {
+        //   type: DataTypes.INTEGER,
+        //   allowNull: true,
+        //   validate:{ len: [2,6]}
+        // },
         mispar_rishuy: {
             type: DataTypes.INTEGER,
             allowNull: true,
+            validate:{ len: [2,6]}
           },
           build_date: {
             type: DataTypes.INTEGER,
             allowNull: true,
+            validate:{ len: [2,6]}
           },
             // waiting_time_rate: {
       //   type: DataTypes.DECIMAL(5, 2),

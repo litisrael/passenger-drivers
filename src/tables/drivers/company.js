@@ -4,7 +4,7 @@ import { createVehicleAvailabilityTourist } from "./vehicles.availability.touris
 
 export const createCompany =  (sequelize) => {
   const Company = sequelize.define(
-    "company",
+    "Company",
     {
       company_id: {
         type: DataTypes.INTEGER,
@@ -14,17 +14,19 @@ export const createCompany =  (sequelize) => {
       company_name: {
         type: DataTypes.STRING(45),
         allowNull: false,
-        validate:{ is: /^[a-zA-Z\s]+$/},
+        validate: { isAlpha: true},
       },
       company_mail: {
         type: DataTypes.STRING(45),
         allowNull: false,
+        unique: true,
         validate: { isEmail: true},  
       },
       company_cell: {
         type: DataTypes.STRING(20),
         allowNull: false,
-        validate: {isNumeric: true},
+        unique: true,
+        validate: {isNumeric: true,  len: [2,10]},
       },
       is_work_available_multiple_days: {
         type: DataTypes.BOOLEAN,

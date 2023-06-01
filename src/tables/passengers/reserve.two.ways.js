@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 
 
-export const createReservationOneWay =  (sequelize) => {
-const ReservationOneWay = sequelize.define('ReservationOneWay', {
+export const createReservationTwoWays =  (sequelize) => {
+const ReservationTwoWays = sequelize.define('ReservationTwoWays', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -32,10 +32,10 @@ const ReservationOneWay = sequelize.define('ReservationOneWay', {
       type: DataTypes.DOUBLE
     }
   },  {
-    tableName: "reservation_oneway",
+    tableName: "reservation_two_ways",
     timestamps: true,
     schema: "extended_travel",
   });
-  return ReservationOneWay
+  return ReservationTwoWays
 }
   
