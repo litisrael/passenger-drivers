@@ -2,7 +2,7 @@
 import { QueryTypes } from 'sequelize';
 
 export async function validateDateNotBetweenExisting(Model, startDate, endDate) {
-  const sequelize = Model.constructor.sequelize;
+
   const query = `SELECT * FROM extended_travel.vehicle_availability_tourist
                  WHERE vehicle_id = :vehicleId
                  AND ((available_from <= :startDay AND :startDay <= available_to) OR
@@ -10,7 +10,7 @@ export async function validateDateNotBetweenExisting(Model, startDate, endDate) 
                       (:startDay <= available_from AND available_to <= :endDay));`;
   
   
-  const existingAvailability = await sequelize.query(query, {
+  const existingAvailability = await Model.sequelize.query(query, {
     type: QueryTypes.SELECT,
     replacements: {
       vehicleId: Model.vehicle_id,
