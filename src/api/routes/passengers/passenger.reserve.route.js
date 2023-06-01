@@ -17,7 +17,7 @@ export function passengerReservationRouter(DB, sequelize = null) {
 
       // dataFromQuery = await queryDriversOfReserve(sequelize, idReserve);
 
-      return res.json({newReservation ,  dataFromQuery: dataFromQueryRoute});
+      return res.json({newReservation ,   dataFromQueryRoute});
     } catch (error) {
       res.status(500).json({
         message: error.message,
@@ -75,7 +75,7 @@ export function passengerReservationRouter(DB, sequelize = null) {
       //  datafn es la funcion que hace el join
       //  dataFromQuery = await queryDriversOfReserve(sequelize, reservation_id);
 
-      return res.json({reservation,  dataFromQuery: dataFromQueryRoute});
+      return res.json({reservation,   dataFromQueryRoute});
     } catch (error) {
       res.status(500).json({
         message: error.message,

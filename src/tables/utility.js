@@ -1,52 +1,29 @@
 
-// import { Op } from 'sequelize';
-// export async function validateDateNotBetweenExisting(tableName, fkColumnName, startDateColumn, endDateColumn, insertDate) {
-//   try {
-//     const existingRecord = await sequelize.models[tableName].findOne({
-//       where: {
-//         [fkColumnName]: sequelize.models[tableName].rawAttributes[fkColumnName].field,
-//         [startDateColumn]: {
-//           [Op.lte]: insertDate
-//         },
-//         [endDateColumn]: {
-//           [Op.gte]: insertDate
-//         }
-//       }
-//     });
+import { QueryTypes } from 'sequelize';
 
-//     if (existingRecord) {
-//       throw new Error(`La fecha de inserción ${insertDate} está dentro de un rango existente en la tabla ${tableName}.`);
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// }
+export async function validateDateNotBetweenExisting(Model, startDate, endDate) {
+  const sequelize = Model.constructor.sequelize;
+  const query = `SELECT * FROM extended_travel.vehicle_availability_tourist
+                 WHERE vehicle_id = :vehicleId
+                 AND ((available_from <= :startDay AND :startDay <= available_to) OR
+                      (available_to <= :startDay AND :endDay <= available_to) OR
+                      (:startDay <= available_from AND available_to <= :endDay));`;
+  
+  
+  const existingAvailability = await sequelize.query(query, {
+    type: QueryTypes.SELECT,
+    replacements: {
+      vehicleId: Model.vehicle_id,
+      startDay: startDate,
+      endDay: endDate
+    }
+  });
+  
+  if (existingAvailability.length > 0) {
+    throw new Error(`The insertion date is within an existing range.`);
+  }
+}
 
-
-// Función para validar si una fecha se encuentra entre los rangos existentes en una tabla específica
-// export async function validateDateNotBetweenExisting( startDateColumn, endDateColumn, insertDate) {
-
-//     const existingRecord = await sequelize.models[tableName].findOne({
-//       where: {
-//         [startDateColumn]: {
-//           [Op.lte]: insertDate
-//         },
-//         [endDateColumn]: {
-//           [Op.gte]: insertDate
-//         }
-//       }
-//     });
-
-//     if (existingRecord) {
-//       throw new Error(`La fecha de inserción ${insertDate} está dentro de un rango existente en la tabla ${tableName}.`);
-//     }
-
-// export async function  validateDateNotBetweenExisting (date1, date2 ,insertDate) {
-//     if (insertDate >= date1 && insertDate <= date2) {
-//       throw new Error(`The insertion date is within an existing ${insertDate} range.`);
-//     }
-//   }
   export  function validate2Dates (date1, date2) {
     if (date1 > date2) {
       throw new Error("The start date must be before the end date.");
