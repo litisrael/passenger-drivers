@@ -1,24 +1,32 @@
 import { DataTypes } from "sequelize";
-
+import { regionEnum } from "../utility.js";
 
 export const createReservationOneWay =  (sequelize) => {
 const ReservationOneWay = sequelize.define('ReservationOneWay', {
-    id: {
+    id_one_way: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     number_of_passengers: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    from_city: {
+      type: DataTypes.ENUM(...regionEnum()),
       allowNull: true,
     },
-    from: {
+    from_street: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    to_city: {
         type: DataTypes.STRING(100),
         allowNull: true,
     },
-    to: {
-        type: DataTypes.STRING(100),
-        allowNull: true,
+    to_street: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     date: {
         type: DataTypes.DATEONLY,
@@ -27,10 +35,6 @@ const ReservationOneWay = sequelize.define('ReservationOneWay', {
      departure_hour:{
       type:DataTypes.TIME
       },
-
-    km_total: {
-      type: DataTypes.DOUBLE
-    }
   },  {
     tableName: "reservation_oneway",
     timestamps: true,

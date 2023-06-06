@@ -12,13 +12,21 @@ const ReservationTwoWays = sequelize.define('ReservationTwoWays', {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    from: {
+    from_city: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    from_street: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    to_city: {
         type: DataTypes.STRING(100),
         allowNull: true,
     },
-    to: {
-        type: DataTypes.STRING(100),
-        allowNull: true,
+    to_street: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     date: {
         type: DataTypes.DATEONLY,
@@ -28,8 +36,8 @@ const ReservationTwoWays = sequelize.define('ReservationTwoWays', {
       type:DataTypes.TIME
       },
 
-    km_total: {
-      type: DataTypes.DOUBLE
+      waiting_hours: {
+      type: DataTypes.TIME
     }
   },  {
     tableName: "reservation_two_ways",

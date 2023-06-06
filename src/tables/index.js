@@ -4,6 +4,7 @@ import {  createReservationTourist } from "./passengers/reserve.tourist.js";
 import { createCompany } from "./drivers/company.js";
 import { createVehicleAvailabilityTourist } from "./drivers/vehicles.availability.tourist.js";
 import { createVehicle } from "./drivers/vehicles.js";
+import {createReservationOneWay  } from "./passengers/reserve.one.way.js";
 // import { queryDriversOfReserve } from "../api/query/reserve.drivers.js";
 
 async function tablesDrivers(sequelize) {
@@ -45,6 +46,16 @@ async function tablesDrivers(sequelize) {
   async function tablesPassenger(sequelize) {
   const passenger = await createPassenger(sequelize);
   const passengerReservationTourist = await createReservationTourist(sequelize);
+  const passengerReservationOneWay = await createReservationOneWay(sequelize)
+  passenger.hasMany(passengerReservationOneWay, { 
+    foreignKey: {   name:
+    "passenger_id", required: true, allowNull: false,}
+   });
+
+   passengerReservationOneWay.belongsTo(passenger, { 
+    foreignKey: {  name: "passenger_id", required: true ,allowNull: false,}
+  });
+  // sequelize.sy
 
   passenger.hasMany(passengerReservationTourist, { 
     foreignKey: {   name:
@@ -56,10 +67,11 @@ async function tablesDrivers(sequelize) {
   });
   // sequelize.sync({ alter: true });
   // para que no puedan update las fk 
-  // passengerReservationTourist.freezeForeignKey("passenger_id");
+  
   return {
      passengerReservationTourist,
      passenger,
+     passengerReservationOneWay 
   };
 }
 async function createTables(sequelize) {

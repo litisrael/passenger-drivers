@@ -12,7 +12,7 @@ export const initRouterDriver = async () => {
   app.use("/company", routers.company);
   app.use("/vehicles", routers.vehicles);
   app.use("/availabilitytourist", routers.vehiclesAvailabilityTourist);
-  
+  app.use("/reservationoneway", routers.ReservationOneWay)
   app.use("/passenger", routers.passenger);
   app.use("/passengerReserve", routers.passengerReservation);
 

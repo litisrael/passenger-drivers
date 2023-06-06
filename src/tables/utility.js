@@ -39,3 +39,34 @@ export async function validateDateNotBetweenExisting(Model, startDate, endDate) 
 export const nextYear = ()=> new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).toISOString().split("T")[0];
 
 export const currentDate =()=> new Date().toISOString().split("T")[0]
+
+
+export function regionEnum() {
+  return [
+    "חולון",
+    "צפת",
+    "חיפה",
+    "עפולה",
+    "תל אביב",
+    "כנרת",
+    "נצרת",
+    "ירושלים",
+    "גוש קטיף",
+    "שומרון",
+    "רמת גן",
+    "גולן",
+    "השרון",
+    "רמלה",
+    "חדרה",
+    "אשקלון",
+    "בקעת הירדן",
+    "עכו",
+    "גוש עציון",
+    "רחובות",
+    "באר שבע",
+    "פתח תקווה",
+    "חברון"
+  ];
+}
+
+
