@@ -5,9 +5,7 @@ export function companyRouter(DB) {
     const companyRouter = express.Router();
     companyRouter.post("/", async (req, res) => {
       try {
-        const newCompany = await DB.drivers.company.create(req.body
-          // , { fields: ["name", "mail", "cel", "number_of_passengers", "languages"],}
-        );
+        const newCompany = await DB.drivers.company.create(req.body );
         return res.json(newCompany);
       } catch (error) {
         return res.status(500).json({

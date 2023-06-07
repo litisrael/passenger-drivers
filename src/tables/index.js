@@ -16,22 +16,22 @@ async function tablesDrivers(sequelize) {
   company.hasMany(vehicle, {
     foreignKey: {
       name:  "company_id",
-    // required: true,
+     required: true,
     allowNull: false,}
   });
   vehicle.belongsTo(company, {
     foreignKey:{   name: "company_id",
-    // required: false,
+     required: false,
     allowNull: false,}
   });
   vehicle.hasMany(vehiclesAvailabilityTourist, {
     foreignKey:{   name: "vehicle_id",
-    // required: true,
+    required: true,
     allowNull: false,}
   });
   vehiclesAvailabilityTourist.belongsTo(vehicle, {
     foreignKey:{   name: "vehicle_id",
-    // required: true,
+     required: true,
     allowNull: false,}
   });
 
@@ -47,6 +47,7 @@ async function tablesDrivers(sequelize) {
   const passenger = await createPassenger(sequelize);
   const passengerReservationTourist = await createReservationTourist(sequelize);
   const passengerReservationOneWay = await createReservationOneWay(sequelize)
+  
   passenger.hasMany(passengerReservationOneWay, { 
     foreignKey: {   name:
     "passenger_id", required: true, allowNull: false,}

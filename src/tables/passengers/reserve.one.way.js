@@ -12,7 +12,7 @@ const ReservationOneWay = sequelize.define('ReservationOneWay', {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    from_city: {
+    from_region: {
       type: DataTypes.ENUM(...regionEnum()),
       allowNull: true,
     },

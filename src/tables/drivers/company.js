@@ -25,8 +25,8 @@ export const createCompany = (sequelize) => {
       company_cell: {
         type: DataTypes.STRING(20),
         allowNull: false,
-        unique: true,
-        validate: { isNumeric: true, len: [2, 10] },
+        // unique: true,
+        // validate: { isNumeric: true, len: [2, 10] },
       },
       is_work_available_multiple_days: {
         type: DataTypes.BOOLEAN,

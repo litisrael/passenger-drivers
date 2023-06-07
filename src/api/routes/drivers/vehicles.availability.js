@@ -5,7 +5,7 @@ export function vehiclesAvailabilityTouristRouter(DB) {
 
   vehiclesAvailabilityTouristRouter.post("/", async (req, res) => {
         try {
-      const newAvailability = await DB.drivers.vehiclesAvailabilityTourist.create(req.body);
+      const newAvailability = await DB.drivers.vehiclesAvailabilityTourist.bulkCreate(req.body);
       return res.json(newAvailability);
     } catch (error) {
       return res.status(500).json({
@@ -67,19 +67,21 @@ export function vehiclesAvailabilityTouristRouter(DB) {
     try {
       
       const { availability_id } = req.params;
-      const availability = await DB.drivers.vehiclesAvailabilityTourist.findByPk(  availability_id  );
+      const availability = await DB.drivers.vehiclesAvailabilityTourist.findAll(  {
+           where: { vehicle_id: availability_id } 
+    }  );
       if (!availability) {
         return res.status(404).json({
           message: `Availability with id ${availability_id} not found`,
         });
       }
    
-      await availability.update(req.body);
+      const updatedAvailability = await DB.drivers.vehiclesAvailabilityTourist.bulkCreate(req.body,{
+        updateOnDuplicate: [  "available_from",  "available_to"]
+      });
 
 
-      // await availability.save();
-
-      res.json(availability);
+      res.json(updatedAvailability);
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }

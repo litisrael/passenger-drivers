@@ -5,7 +5,7 @@ export function vehicleRouter(DB) {
  
   vehicleRouter.post("/", async (req, res) => {
     try {
-      const newVehicle = await DB.drivers.vehicle.create(req.body);
+      const newVehicle = await DB.drivers.vehicle.bulkCreate(req.body);
       return res.json(newVehicle);
     } catch (error) {
       return res.status(500).json({
@@ -72,22 +72,30 @@ export function vehicleRouter(DB) {
   });
 
   vehicleRouter.put("/:vehicle_id", async (req, res) => {
+    
     try {
       const { vehicle_id } = req.params;
-      const vehicle = await DB.drivers.vehicle.findByPk(vehicle_id);
-
+      const vehicle = await  DB.drivers.vehicle.findAll({
+        where: { company_id: vehicle_id }
+      });
       if (!vehicle) {
         return res
           .status(404)
           .json({ message: `Vehicle with id ${vehicle_id} not found` });
       }
 
-      await vehicle.update(req.body);
-      res.json(vehicle);
-    } catch (error) {
-      return res.status(500).json({ message: error.message });
-    }
-  });
+  
+    const updatedVehicles = await DB.drivers.vehicle.bulkCreate(req.body,{
+      updateOnDuplicate: ['number_of_seats','mispar_rishuy','build_date','overtime_price']}
+
+    );
+
+    res.json(updatedVehicles);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
 
   return vehicleRouter;
 }

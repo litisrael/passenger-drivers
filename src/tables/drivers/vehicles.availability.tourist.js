@@ -34,19 +34,24 @@ export function createVehicleAvailabilityTourist(sequelize) {
       schema: "extended_travel",
     }
   );
-  VehicleAvailability.beforeCreate(async (Model) => {
-    validate2Dates(Model.available_from, Model.available_to);
-    await validateDateNotBetweenExisting(
-      Model,
-      Model.available_from,
-      Model.available_to
+  // beforeBulkCreate / beforeBulkUpdate
+  VehicleAvailability.beforeBulkCreate(async (models) => {
+    for (const model of models) {
+      validate2Dates(model.available_from, model.available_to);
+      await validateDateNotBetweenExisting(
+        model,
+        model.available_from,
+        model.available_to
+      );
+    }
+  });
+  VehicleAvailability.beforeBulkUpdate((options) => {
+    validateAfterCurrentDate(options.individualHooks.updatedValues.available_from);
+    validate2Dates(
+      options.individualHooks.updatedValues.available_from,
+      options.individualHooks.updatedValues.available_to
     );
   });
-  VehicleAvailability.beforeUpdate((Model) => {
-    validateAfterCurrentDate(Model.available_from);
-    validate2Dates(Model.available_from, Model.available_to);
-  });
-
   //  driverAvailability.sync({ force: true });
 
   return VehicleAvailability;
