@@ -6,15 +6,16 @@ import { vehiclesAvailabilityTouristRouter } from "./drivers/vehicles.availabili
 import { passengerReservationRouter } from "./passengers/passenger.reserve.route.js";
 import { vehicleRouter } from "./drivers/vehicles.routes.js";
 import { passengerReservationOneWay } from "./passengers/passenger.resrv.oneway.js";
- 
+import { dayOfWeekRouter } from "./drivers/days.of.week.js"; 
 
 export async function createServers() {
   const DB = await initDB();
   const company = companyRouter(DB.tables);
   const vehiclesAvailabilityTourist =  vehiclesAvailabilityTouristRouter(DB.tables);
   const vehicles= vehicleRouter(DB.tables)
+  const DaysOfWeek= dayOfWeekRouter(DB.tables)
   const passenger = passengerRouter(DB.tables);
    const ReservationOneWay = passengerReservationOneWay(DB.tables)
   const passengerReservation = passengerReservationRouter(DB.tables,DB.sequelize);
-  return {  company, vehiclesAvailabilityTourist, passenger, passengerReservation,vehicles, ReservationOneWay};
+  return {  company, vehiclesAvailabilityTourist, passenger, passengerReservation,vehicles, ReservationOneWay, DaysOfWeek};
 }

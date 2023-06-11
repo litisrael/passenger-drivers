@@ -1,45 +1,39 @@
 
-import { QueryTypes } from 'sequelize';
 
-export async function validateDateNotBetweenExisting(Model, startDate, endDate) {
-
-  const query = `SELECT * FROM extended_travel.vehicle_availability_tourist
-                 WHERE vehicle_id = :vehicleId
-                 AND ((available_from <= :startDay AND :startDay <= available_to) OR
-                      (available_to <= :startDay AND :endDay <= available_to) OR
-                      (:startDay <= available_from AND available_to <= :endDay));`;
+export function validateTimeBeforeB (a, b) {
+  const aDate = new Date(a);
+  const bDate = new Date(b);
   
-  
-  const existingAvailability = await Model.sequelize.query(query, {
-    type: QueryTypes.SELECT,
-    replacements: {
-      vehicleId: Model.vehicle_id,
-      startDay: startDate,
-      endDay: endDate
-    }
-  });
-  
-  if (existingAvailability.length > 0) {
-    throw new Error(`The insertion date is within an existing range.`);
+  if (aDate >= bDate) {
+     throw new Error(`The ${a} must be before the ${b}.`);
   }
-}
+ }
 
-  export  function validate2Dates (date1, date2) {
-    if (date1 >= date2) {
-      throw new Error("The start date must be before the end date.");
+export const dayOfWeekString =()=> ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+
+  export  function validateABeforeB (a, b) {
+    if (a >= b) {
+      throw new Error(`The ${a} must be before the ${b}.`);
     }
   }
+  export const currentDate =()=> new Date().toISOString().split("T")[0]
 
   export  function validateAfterCurrentDate (date) {
     if (date < currentDate()) {
-      throw new Error("The date must be after current date.");
+      throw new Error(`The ${date} must be after current date.`);
     }
   }
 
 export const nextYear = ()=> new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).toISOString().split("T")[0];
 
-export const currentDate =()=> new Date().toISOString().split("T")[0]
+export function getDayOfWeekInEnglish(date) {
+  const d = new Date(date);
+  const dayOfWeek = d.getDay();
+  return dayOfWeekString()[dayOfWeek];
+}
 
+export const dayOfWeekEnum =  ()=>  dayOfWeekString();
 
 export function regionEnum() {
   return [

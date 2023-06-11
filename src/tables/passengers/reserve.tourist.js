@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { validate2Dates, nextYear, currentDate,validateAfterCurrentDate} from "../utility.js";
+import {   validateABeforeB, nextYear, currentDate,validateAfterCurrentDate} from "../utility.js";
 import { queryAvailableDriversForTrip } from "../query/available_drivers.js";
 
 let DriversForTrip;
@@ -29,19 +29,19 @@ export const createReservationTourist = (sequelize) => {
       },
     },
     {
-      tableName: "passenger_reservation",
+      tableName: "reserve_tourist",
       timestamps: false,
       schema: "extended_travel",
     }
   );
   PassengerReservation.beforeCreate(async(model) => {
-    validate2Dates(model.start_day, model.end_day);
+    validateABeforeB(model.start_day, model.end_day);
    
   });
 
   PassengerReservation.beforeUpdate((model) => {
     validateAfterCurrentDate(model.start_day);
-    validate2Dates(model.start_day, model.end_day);
+    validateABeforeB(model.start_day, model.end_day);
   });
 
   PassengerReservation.afterCreate( (model) => {

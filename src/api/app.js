@@ -15,6 +15,6 @@ export const initRouterDriver = async () => {
   app.use("/reservationoneway", routers.ReservationOneWay)
   app.use("/passenger", routers.passenger);
   app.use("/passengerReserve", routers.passengerReservation);
-
+  app.use("/day", routers.DaysOfWeek);
   return app;
 };

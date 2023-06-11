@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import { regionEnum } from "../utility.js";
-import { createVehicleAvailabilityTourist } from "./vehicles.availability.tourist.js";
+import { createVehicleAvailabilityTourist } from "../availability/vehicles.availability.tourist.js";
 
 export const createCompany = (sequelize) => {
   const Company = sequelize.define(
@@ -14,7 +14,7 @@ export const createCompany = (sequelize) => {
       company_name: {
         type: DataTypes.STRING(45),
         allowNull: false,
-        validate: { isAlpha: true },
+        validate: { is: /^[a-zA-Z0-9\s]+$/ },
       },
       company_mail: {
         type: DataTypes.STRING(45),

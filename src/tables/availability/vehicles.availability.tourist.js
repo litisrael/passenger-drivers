@@ -1,11 +1,13 @@
 import { DataTypes } from "sequelize";
+
 import {
-  validate2Dates,
+  validateABeforeB,
   nextYear,
   currentDate,
   validateAfterCurrentDate,
-  validateDateNotBetweenExisting,
 } from "../utility.js";
+import { validateDateNotBetweenExisting } from "../query/available_drivers.js";
+
 
 export function createVehicleAvailabilityTourist(sequelize) {
   const VehicleAvailability = sequelize.define(
@@ -31,26 +33,32 @@ export function createVehicleAvailabilityTourist(sequelize) {
     {
       tableName: "vehicle_availability_tourist",
       timestamps: false,
-      schema: "extended_travel",
+      schema: "availability_drivers",
     }
   );
   // beforeBulkCreate / beforeBulkUpdate
   VehicleAvailability.beforeBulkCreate(async (models) => {
     for (const model of models) {
-      validate2Dates(model.available_from, model.available_to);
+      
+      validateABeforeB(model.available_from, model.available_to);
       await validateDateNotBetweenExisting(
         model,
         model.available_from,
         model.available_to
-      );
+      )
+     
     }
   });
-  VehicleAvailability.beforeBulkUpdate((options) => {
-    validateAfterCurrentDate(options.individualHooks.updatedValues.available_from);
-    validate2Dates(
-      options.individualHooks.updatedValues.available_from,
-      options.individualHooks.updatedValues.available_to
+  VehicleAvailability.beforeBulkUpdate(async(models) => {
+    for (const model of models) {
+    validateAfterCurrentDate(model.available_from);
+    validateABeforeB(model.available_from, model.available_to );
+    await validateDateNotBetweenExisting(
+      model,
+      model.available_from,
+      model.available_to
     );
+    }
   });
   //  driverAvailability.sync({ force: true });
 
