@@ -1,14 +1,20 @@
 
 
-export function validateTimeBeforeB (a, b) {
-  const aDate = new Date(a);
-  const bDate = new Date(b);
-  
-  if (aDate >= bDate) {
-     throw new Error(`The ${a} must be before the ${b}.`);
-  }
- }
 
+export function validateHourBeforeHour(a, b) {
+  const addLeadingZero = (time) => {
+    const [hours, minutes] = time.split(':');
+    const formattedMinutes = minutes.length === 1 ? `0${minutes}` : minutes;
+    return `${hours}:${formattedMinutes}`;
+  };
+
+  const formattedA = addLeadingZero(a);
+  const formattedB = addLeadingZero(b);
+
+  if (formattedA >= formattedB) {
+    throw new Error(`The ${formattedA} must be before the ${formattedB}.`);
+  }
+}
 export const dayOfWeekString =()=> ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 

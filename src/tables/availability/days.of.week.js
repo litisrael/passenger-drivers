@@ -1,13 +1,11 @@
 import { DataTypes } from "sequelize";
-import { dayOfWeekString,  validateABeforeB, validateTimeBeforeB} from "../utility.js";
+import { validateHourBeforeHour, validateABeforeB } from "../utility.js";
 
 export const createDaysOfWeek = (sequelize) => {
-  let tablesDays
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  
-  daysOfWeek.forEach(dayOfWeek => {
 
-  tablesDays = sequelize.define(dayOfWeek, {
+  const tablesDays = daysOfWeek.map(dayOfWeek => {
+    const table = sequelize.define(dayOfWeek, {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -15,36 +13,33 @@ export const createDaysOfWeek = (sequelize) => {
       },
       busyFromHour: {
         type: DataTypes.TIME,
-        // validate: { isAfter: currentDate },
         defaultValue: '00:00'
       },
       busyEndHour: {
         type: DataTypes.TIME,
         defaultValue: '00:00'
-       
-      },
-    
-    },
-    {
-      tableName:dayOfWeek,
+      }
+    }, {
+      tableName: dayOfWeek,
       timestamps: false,
-      schema: "availability_drivers",
-    }
-    );
+      schema: "availability_drivers"
+    });
+
+    // Añadir los hooks de validación a cada tabla
+    table.beforeBulkCreate(async (models) => {
+      for (const model of models) {
+        validateHourBeforeHour(model.busyFromHour, model.busyEndHour);
+      }
+    });
+
+    table.beforeBulkUpdate(async (models) => {
+      for (const model of models) {
+        validateHourBeforeHour(model.busyFromHour, model.busyEndHour);
+      }
+    });
+
+    return table;
   });
-//    tablesDays.beforeBulkCreate(async (models) => {
-//     for (const model in models) {
-//       validateABeforeB(model.busyFromHour, model.busyEndHour);
-//     }
-//   });
 
-
-// tablesDays.beforeBulkUpdate(async(models) => {
-//   for (const model of models) {
-
-//     validateABeforeB(model.busyFromHour, model.busyEndHour);
-//   }})
-
-
-  return tablesDays
+  return tablesDays;
 }

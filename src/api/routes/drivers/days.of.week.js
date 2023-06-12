@@ -5,12 +5,15 @@ export function dayOfWeekRouter(DB) {
 
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-  daysOfWeek.forEach(dayOfWeek => {
 
-    dayOfWeekRouter.delete(`/${dayOfWeek}/:id`, async (req, res) => {
+  daysOfWeek.forEach((day, index) => {
+    const table = DB.drivers.daysOfWeek[index]; // Accede a la tabla según el índice del array
+    
+console.log(table)
+    dayOfWeekRouter.delete(`/${day}/:id`, async (req, res) => {
         const {id} = req.params 
         try{
-        const day = await DB.drivers.daysOfWeek.findByPk(id)
+        const day = await table.findByPk(id)
         if (!day) {
             return res.status(404).json({
                   message: `Day ${dayOfWeek} not found`,
@@ -29,9 +32,9 @@ export function dayOfWeekRouter(DB) {
         })
 
 
-    dayOfWeekRouter.get(`/${dayOfWeek}`, async (req, res) => {
+    dayOfWeekRouter.get(`/${day}`, async (req, res) => {
       try {
-        const day = await DB.drivers.daysOfWeek.findAll();
+        const day = await table.findAll();
         if (!day) {
           return res.status(404).json({
             message: `Day ${dayOfWeek} not found`,
@@ -45,19 +48,19 @@ export function dayOfWeekRouter(DB) {
       }
     });
 
-    dayOfWeekRouter.get(`/${dayOfWeek}/:id`, async (req, res) => {
+    dayOfWeekRouter.get(`/${day}/:id`, async (req, res) => {
         const { id } = req.params;
 
         try {
-          const day = await DB.drivers.daysOfWeek.findAll({
+          const dia = await table.findAll({
             where: { vehicle_id: id },
         });
-          if (!day) {
+          if (!dia) {
             return res.status(404).json({
-              message: `Day ${dayOfWeek} not found`,
+              message: `Day ${dia} not found`,
             });
           }
-          return res.json(day);
+          return res.json(dia);
         } catch (error) {
           return res.status(500).json({
             message: error.message,
@@ -65,20 +68,20 @@ export function dayOfWeekRouter(DB) {
         }
       });
 
-        dayOfWeekRouter.put(`/${dayOfWeek}/:id`, async (req, res) => {
+        dayOfWeekRouter.put(`/${day}/:id`, async (req, res) => {
         const { id } = req.params; 
         try {
-            const day = await DB.drivers.daysOfWeek.findAll({
+            const dia = await table.findAll({
               where: { vehicle_id: id },
           });
         
-          if (!day) {
+          if (!dia) {
             return res.status(404).json({
-              message: `Day ${dayOfWeek} not found`,
+              message: `Day ${day} not found`,
             });
           }
        
-          const updatedBusyDay = await DB.drivers.daysOfWeek.bulkCreate(req.body,{
+          const updatedBusyDay = await table.bulkCreate(req.body,{
             updateOnDuplicate: [   "busyFromHour", "busyEndHour"]
           });
     
@@ -88,9 +91,9 @@ export function dayOfWeekRouter(DB) {
           return res.status(500).json({ message: error.message });
         }
       });
-    dayOfWeekRouter.post(`/${dayOfWeek}`, async (req, res) => {
+    dayOfWeekRouter.post(`/${day}`, async (req, res) => {
         try {
-            const day = await DB.drivers.daysOfWeek.bulkCreate(req.body);
+            const day = await table.bulkCreate(req.body);
           return res.json(day);
         } catch (error) {
           return res.status(500).json({
