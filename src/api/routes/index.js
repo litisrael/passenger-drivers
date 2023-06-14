@@ -19,5 +19,5 @@ export async function createServers() {
   const passengerReservation = passengerReservationRouter(DB.tables,DB.sequelize);
   const allDays= allDaysRouter(DB.tables)
   
-  return { allDays, company, vehiclesAvailabilityTourist, passenger, passengerReservation,vehicles, ReservationOneWay, DaysOfWeek};
+  return { company, vehiclesAvailabilityTourist, passenger, passengerReservation,vehicles, ReservationOneWay, DaysOfWeek, allDays};
 }

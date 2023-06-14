@@ -17,7 +17,7 @@ export const createDaysOfWeek = (sequelize) => {
       },
       unavailable_until: {
         type: DataTypes.TIME,
-        defaultValue: '00:00'
+        defaultValue: '00:01'
       }
     }, {
       tableName: dayOfWeek,
