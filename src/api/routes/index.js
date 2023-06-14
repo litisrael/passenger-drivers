@@ -7,7 +7,7 @@ import { passengerReservationRouter } from "./passengers/passenger.reserve.route
 import { vehicleRouter } from "./drivers/vehicles.routes.js";
 import { passengerReservationOneWay } from "./passengers/passenger.resrv.oneway.js";
 import { dayOfWeekRouter } from "./drivers/days.of.week.js"; 
-
+import { allDaysRouter } from "./drivers/alldays.js";
 export async function createServers() {
   const DB = await initDB();
   const company = companyRouter(DB.tables);
@@ -17,5 +17,7 @@ export async function createServers() {
   const passenger = passengerRouter(DB.tables);
    const ReservationOneWay = passengerReservationOneWay(DB.tables)
   const passengerReservation = passengerReservationRouter(DB.tables,DB.sequelize);
-  return {  company, vehiclesAvailabilityTourist, passenger, passengerReservation,vehicles, ReservationOneWay, DaysOfWeek};
+  const allDays= allDaysRouter(DB.tables)
+  
+  return { allDays, company, vehiclesAvailabilityTourist, passenger, passengerReservation,vehicles, ReservationOneWay, DaysOfWeek};
 }

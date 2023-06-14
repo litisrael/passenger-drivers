@@ -1,14 +1,12 @@
 import express from "express";
+import {dayOfWeekString} from "../../../tables/utility.js";
 export function dayOfWeekRouter(DB) {
   const dayOfWeekRouter = express.Router();
 
-  const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-  daysOfWeek.forEach((day, index) => {
-    const table = DB.drivers.daysOfWeek[index]; // Accede a la tabla según el índice del array
-
-    
-
+  const daysOfWeek = dayOfWeekString()
+  daysOfWeek.forEach((day) => {
+    const table = DB.drivers.daysOfWeek.find(table => table.tableName === day);
+  
     dayOfWeekRouter.delete(`/${day}/:id`, async (req, res) => {
       const { id } = req.params;
       try {
@@ -79,7 +77,7 @@ export function dayOfWeekRouter(DB) {
         }
 
         const updatedBusyDay = await table.bulkCreate(req.body, {
-          updateOnDuplicate: ["busyFromHour", "busyEndHour"],
+          updateOnDuplicate: ["unavailable_starting", "unavailable_until"],
         });
 
         res.json(updatedBusyDay);

@@ -109,7 +109,7 @@ export async function initDB() {
   const sequelize = await getConnection();
   const tables = await createTables(sequelize);
   sequelize.sync(
-      // {force:true}
+        //  {force:true}
     );
   return { tables, sequelize };
 }

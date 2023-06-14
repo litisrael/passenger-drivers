@@ -12,6 +12,7 @@ export const getConnection = async () => {
     database: "transoprt",
     username: process.env.db_user,
     password: process.env.db_password_local,
+    quoteIdentifiers: false
   });
 
   return await sequelize.authenticate()
