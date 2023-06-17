@@ -6,9 +6,9 @@ import {
 } from "../utility.js";
 import {  queryAvailableDriversForTrip } from "../query/oneway.js";
 
-let DriversForOneWay;
+ let DriversForOneWay;
 
-console.log("soy DriversForOneWay_-------___",DriversForOneWay)
+// console.log("soy DriversForOneWay_-------___",DriversForOneWay)
 
 export const createReservationOneWay = (sequelize) => {
   const ReservationOneWay = sequelize.define(
@@ -39,7 +39,7 @@ export const createReservationOneWay = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      date: {
+      departure_date: {
         type: DataTypes.DATEONLY,
         allowNull: true,
       },
@@ -53,18 +53,18 @@ export const createReservationOneWay = (sequelize) => {
     },
     {
       tableName: "reservation_oneway",
-      timestamps: true,
+   timestamps: true,
       schema: "extended_travel",
     }
   );
   ReservationOneWay.beforeCreate(async (model) => {
-    const dayOfWeekInEnglish =  getDayOfWeekInEnglish(model.date);
-    console.log(dayOfWeekInEnglish);
+    const dayOfWeekInEnglish =  getDayOfWeekInEnglish(model.departure_date);
+    // console.log(dayOfWeekInEnglish);
     model.day_week = dayOfWeekInEnglish;
   });
 
   ReservationOneWay.beforeUpdate(async (model) => {
-    const dayOfWeekInEnglish = await getDayOfWeekInEnglish(model.date);
+    const dayOfWeekInEnglish = await getDayOfWeekInEnglish(model.departure_date);
     model.day_week = dayOfWeekInEnglish;
   });
 
@@ -74,10 +74,10 @@ export const createReservationOneWay = (sequelize) => {
     DriversForOneWay =   queryAvailableDriversForTrip(sequelize , model.day_week)
  })
 
-//  PassengerReservation.afterUpdate( (model) => {
-//    DriversForTrip =   queryAvailableDriversForTrip(sequelize , model.id)
+ ReservationOneWay.afterUpdate( (model) => {
+   DriversForTrip =   queryAvailableDriversForTrip(sequelize , model.id)
  
-// })
+})
 
 
   return ReservationOneWay;

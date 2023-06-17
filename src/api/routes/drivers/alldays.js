@@ -5,19 +5,39 @@ export  function allDaysRouter(DB) {
   const dayOfWeekRouter = express.Router();
   const daysOfWeek = dayOfWeekString();
 
-  // Ruta para obtener todos los días
+  
   dayOfWeekRouter.get("/allDays", getAllDays);
 
-  // Ruta para crear nuevos registros
   dayOfWeekRouter.post("/allDays", createDays);
 
-  // Ruta para actualizar registros existentes
   dayOfWeekRouter.put("/allDays", updateDays);
 
-  // Ruta para eliminar registros
   dayOfWeekRouter.delete("/allDays", deleteDays);
+  dayOfWeekRouter.get("/allDays/:id", getAllDaysById);
 
-  // Función para obtener todos los días
+  async function getAllDaysById(req, res) {
+    try {
+      const id = req.params.id;
+      const allDaysData = [];
+  
+      for (const day of daysOfWeek) {
+        const table = DB.drivers.daysOfWeek.find((table) => table.tableName === day);
+  
+        const records = await table.findAll({
+          where: { vehicle_id: id },
+        });
+  
+        allDaysData.push({ day, data: records });
+      }
+  
+      return res.json(allDaysData);
+    } catch (error) {
+      return res.status(500).json({
+        message: error.message,
+      });
+    }
+  }
+  
   async function getAllDays(req, res) {
     try {
       const allDaysData = [];
@@ -26,12 +46,8 @@ export  function allDaysRouter(DB) {
         const table = DB.drivers.daysOfWeek.find(
           (table) => table.tableName === day
         );
-        const dayData = await table.findAll({ attributes: ["vehicle_id"] });
-        const vehicleIds = dayData.map((item) => item.vehicle_id);
-
-        const records = await table.findAll({
-          where: { vehicle_id: vehicleIds },
-        });
+    
+        const records = await table.findAll( );
         allDaysData.push({ day, data: records });
       }
 
@@ -84,7 +100,7 @@ export  function allDaysRouter(DB) {
           updateOnDuplicate: [
             "unavailable_starting",
             "unavailable_until",
-            "vehicle_id",
+     
           ],
         });
 

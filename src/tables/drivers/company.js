@@ -7,14 +7,15 @@ export const createCompany = (sequelize) => {
     "Company",
     {
       company_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        autoIncrement: true,
+       
       },
       company_name: {
         type: DataTypes.STRING(45),
         allowNull: false,
-        validate: { is: /^[a-zA-Z0-9\s]+$/ },
+        // validate: { is: /^[a-zA-Z0-9\s]+$/ }, no acepta hebreo
       },
       company_mail: {
         type: DataTypes.STRING(45),
@@ -38,6 +39,7 @@ export const createCompany = (sequelize) => {
         allowNull: true,
       },
       work_zone: {
+
         type: DataTypes.ARRAY(DataTypes.ENUM(regionEnum())),
         allowNull: false,
         validate: {
@@ -66,6 +68,6 @@ export const createCompany = (sequelize) => {
     }
   );
 
-  //  sequelize.sync({force:true})
+  //  sequelize.sync({alter:true})
   return Company;
 };

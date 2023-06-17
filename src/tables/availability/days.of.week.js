@@ -7,8 +7,8 @@ export const createDaysOfWeek = (sequelize) => {
   const tablesDays = daysOfWeek.map(dayOfWeek => {
     const table = sequelize.define(dayOfWeek, {
       id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true
       },
       unavailable_starting: {
