@@ -71,7 +71,7 @@ export const createReservationOneWay = (sequelize) => {
   
 
   ReservationOneWay.afterCreate( (model) => {
-    DriversForOneWay =   queryAvailableDriversForTrip(sequelize , model.day_week)
+    DriversForOneWay =   queryAvailableDriversForTrip(sequelize , model.day_week, model.from_region, model.id_one_way)
  })
 
  ReservationOneWay.afterUpdate( (model) => {
