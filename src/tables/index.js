@@ -119,11 +119,7 @@ export async function initDB() {
   const sequelize = await getConnection();
   const tables = await createTables(sequelize);
   sequelize.sync(
-<<<<<<< HEAD
-          // {force :true}
-=======
         //  {force:true}
->>>>>>> 24c84093643dcf970b4df3ce237889d22696ff64
     );
   return { tables, sequelize };
 }

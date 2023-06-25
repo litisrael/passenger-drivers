@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 export async function queryAvailableDriversForTrip(sequelize, dayOfWeek, from_region ,id_one_way) {
   try {
@@ -20,87 +19,12 @@ export async function queryAvailableDriversForTrip(sequelize, dayOfWeek, from_re
   
 if (results[0].length === 0) {
 console.log('No drivers available');
-return 'No drivers available';
+return results.json();
 }
 console.log(results[0]);
 return results[0];
-=======
-// export async function queryAvailableDriversForTrip(sequelize, dayOfWeek) {
-//     try {
-//       const results = await sequelize.query(`
-//       SELECT *
-//       FROM extended_travel.company AS c
-//       INNER JOIN extended_travel.vehicles AS v ON c.company_id = v.company_id
-//       INNER JOIN availability_drivers."${dayOfWeek}" AS a ON v.vehicle_id = a.vehicle_id;
-      
-//       SELECT *
-//       FROM extended_travel.passenger AS p 
-//       INNER JOIN extended_travel.reservation_oneway AS r ON r.passenger_id = p.id
-//       WHERE ARRAY[c.work_zone]::text[] && ARRAY(
-//         SELECT from_region::text
-//         FROM extended_travel.reservation_oneway
-//       )
-//       AND r.day_week = '${dayOfWeek}';
-//     `);
-//     // WHERE ARRAY[c.work_zone]::text[] && ARRAY(
-//     //   SELECT from_region::text
-//     //   FROM extended_travel.reservation_oneway
-
-    
-//       console.log(results[0]);
-//       return results[0];
-//     } catch (error) {
-//       console.error(error);
-//       return error;
-//     }
-//   }
-
-export async function queryAvailableDriversForTrip(sequelize, dayOfWeek) {
-  try {
-    const results = await sequelize.query(`
-   
-SELECT c.*, v.*, a.*
-FROM extended_travel.company AS c
-INNER JOIN extended_travel.vehicles AS v ON c.company_id = v.company_id
-INNER JOIN availability_drivers."${dayOfWeek}" AS a ON v.vehicle_id = a.vehicle_id;
-
-
-    
-  `);
-
-
-    console.log(results[0]);
-    return results[0];
->>>>>>> 24c84093643dcf970b4df3ce237889d22696ff64
   } catch (error) {
     console.error(error);
     return error;
   }
 }
-<<<<<<< HEAD
-
-
-
-// export async function queryAvailableDriversForTrip(sequelize, dayOfWeek) {
-//   try {
-//     const results = await sequelize.query(`
- 
-// SELECT c.*, v.*, a.*
-// FROM extended_travel.company AS c
-// INNER JOIN extended_travel.vehicles AS v ON c.company_id = v.company_id
-// INNER JOIN availability_drivers."${dayOfWeek}" AS a ON v.vehicle_id = a.vehicle_id;
-
-
-  
-//   `);
-
-
-//     console.log(results[0]);
-//     return results[0];
-//   } catch (error) {
-//     console.error(error);
-//     return error;
-//   }
-// }
-=======
->>>>>>> 24c84093643dcf970b4df3ce237889d22696ff64
