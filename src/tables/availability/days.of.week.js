@@ -7,17 +7,17 @@ export const createDaysOfWeek = (sequelize) => {
   const tablesDays = daysOfWeek.map(dayOfWeek => {
     const table = sequelize.define(dayOfWeek, {
       id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true
       },
-      busyFromHour: {
+      unavailable_starting: {
         type: DataTypes.TIME,
         defaultValue: '00:00'
       },
-      busyEndHour: {
+      unavailable_until: {
         type: DataTypes.TIME,
-        defaultValue: '00:00'
+        defaultValue: '00:01'
       }
     }, {
       tableName: dayOfWeek,
@@ -28,13 +28,13 @@ export const createDaysOfWeek = (sequelize) => {
     // Añadir los hooks de validación a cada tabla
     table.beforeBulkCreate(async (models) => {
       for (const model of models) {
-        validateHourBeforeHour(model.busyFromHour, model.busyEndHour);
+        validateHourBeforeHour(model.unavailable_starting, model.unavailable_until);
       }
     });
 
     table.beforeBulkUpdate(async (models) => {
       for (const model of models) {
-        validateHourBeforeHour(model.busyFromHour, model.busyEndHour);
+        validateHourBeforeHour(model.unavailable_starting, model.unavailable_until);
       }
     });
 
