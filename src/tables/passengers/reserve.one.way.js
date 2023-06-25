@@ -10,6 +10,10 @@ let DriversForOneWay;
 
 // console.log("soy DriversForOneWay_-------___",DriversForOneWay)
 
+let DriversForOneWay;
+
+console.log("soy DriversForOneWay_-------___",DriversForOneWay)
+
 export const createReservationOneWay = (sequelize) => {
   const ReservationOneWay = sequelize.define(
     "ReservationOneWay",
@@ -90,3 +94,4 @@ export const createReservationOneWay = (sequelize) => {
 
   return ReservationOneWay;
 };
+

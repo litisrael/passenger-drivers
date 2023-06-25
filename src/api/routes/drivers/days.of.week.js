@@ -1,6 +1,9 @@
 import express from "express";
 import {dayOfWeekString} from "../../../tables/utility.js";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 24c84093643dcf970b4df3ce237889d22696ff64
 export function dayOfWeekRouter(DB) {
   const dayOfWeekRouter = express.Router();
 

@@ -26,6 +26,9 @@ export const initRouterDriver = async () => {
   app.use("/passengerReserve", routers.passengerReservation);
   app.use("/day", routers.DaysOfWeek);
   app.use("/day", routers.allDays);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 24c84093643dcf970b4df3ce237889d22696ff64
   return app;
 };
