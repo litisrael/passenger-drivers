@@ -10,7 +10,6 @@ export const createCompany = (sequelize) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-       
       },
       company_name: {
         type: DataTypes.STRING(45),
@@ -33,13 +32,16 @@ export const createCompany = (sequelize) => {
         type: DataTypes.BOOLEAN,
         allowNull: true,
       },
+      // genero: { 
+      //   type: DataTypes.STRING ,
+      //   allowNull: true,
+      // },
 
       shomer_shabat: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
       },
       work_zone: {
-
         type: DataTypes.ARRAY(DataTypes.ENUM(regionEnum())),
         allowNull: false,
         validate: {
@@ -56,7 +58,6 @@ export const createCompany = (sequelize) => {
           },
         },
       },
-
 
       // languages: {
       //   type: DataTypes.ARRAY(DataTypes.STRING(30)),
