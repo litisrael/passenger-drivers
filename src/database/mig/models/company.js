@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     company_cell: DataTypes.STRING,
     is_work_available_multiple_days: DataTypes.BOOLEAN,
     shomer_shabat: DataTypes.BOOLEAN,
-    work_zone: DataTypes.STRING
+   work_zone:  DataTypes.ENUM('נצרת', 'צפת', 'אילת'),
+     
+    
   }, {
     sequelize,
     modelName: 'Company',

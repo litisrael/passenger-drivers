@@ -3,17 +3,17 @@
 
 
 /**
- * pude agregar y borrar una columna
+ * pude agregar y borrar una
  */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.removeColumn(
-      {
-        tableName: 'company',
-        schema: 'extended_travel'
-      },
-      'genero'
-    );
+    // await queryInterface.removeColumn(
+    //   {
+    //     tableName: 'company',
+    //     schema: 'extended_travel'
+    //   },
+    //   'genero'
+    // );
   },
   
   async down(queryInterface, Sequelize) {

@@ -1,10 +1,12 @@
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert(
-      { tableName: 'company', schema: 'extended_travel' }, // Agregamos el objeto de opciones con la propiedad "schema"
+      {
+        tableName: 'company',
+        schema: 'extended_travel'
+      },
       [
         {
           company_id: '17776a07-f596-4556-a88a-3dea75af5671',
@@ -15,17 +17,19 @@ module.exports = {
           shomer_shabat: true,
           work_zone: ['צפת']
         }
-      ]
+      ],
+      {}
+    );
+  },
+
+  async down(queryInterface, Sequelize) {
+    return queryInterface.bulkDelete(
+      {
+        tableName: 'company',
+        schema: 'extended_travel'
+      },
+      null,
+      {}
     );
   }
-}
-  
-//   async down (queryInterface, Sequelize) {
-//     /**
-//      * Add commands to revert seed here.
-//      *
-//      * Example:
-//      * await queryInterface.bulkDelete('People', null, {});
-//      */
-//   }
-// };
+};

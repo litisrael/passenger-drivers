@@ -32,10 +32,10 @@ export const createCompany = (sequelize) => {
         type: DataTypes.BOOLEAN,
         allowNull: true,
       },
-      // genero: { 
-      //   type: DataTypes.STRING ,
-      //   allowNull: true,
-      // },
+      genero: { 
+        type: DataTypes.STRING ,
+        allowNull: true,
+      },
 
       shomer_shabat: {
         type: DataTypes.BOOLEAN,
