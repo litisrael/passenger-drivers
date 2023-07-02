@@ -5597,6 +5597,7 @@ node_modules/yargs-parser/build/lib/string-utils.js
 node_modules/yargs-parser/build/lib/tokenize-arg-string.js
 node_modules/yargs-parser/build/lib/yargs-parser-types.js
 node_modules/yargs-parser/build/lib/yargs-parser.js
+<<<<<<< HEAD
 node_modules/cors/CONTRIBUTING.md
 node_modules/cors/HISTORY.md
 node_modules/cors/LICENSE
@@ -5693,3 +5694,5 @@ node_modules/@babel/parser/lib/util/whitespace.js
 node_modules/@babel/parser/lib/util/whitespace.js.map
 node_modules/@babel/parser/typings/babel-parser.d.ts
 node_modules/object-hash/dist/object_hash.js
+=======
+>>>>>>> fc6bd1b348a95f9ca6f1f0cdbcd7197657f91bd5

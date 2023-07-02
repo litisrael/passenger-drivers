@@ -15,7 +15,11 @@ module.exports = {
           company_cell: '77777777',
           is_work_available_multiple_days: false,
           shomer_shabat: true,
+<<<<<<< HEAD
           work_zone: [{צפת}]
+=======
+          work_zone: ['צפת']
+>>>>>>> fc6bd1b348a95f9ca6f1f0cdbcd7197657f91bd5
         }
       ],
       {}
