@@ -1,15 +1,16 @@
 import express from "express";
 
 
-export function passengerReservationOneWay(DB) {
-  const passengerReservationOneWay = express.Router();
+export function passengerReservationTwoWays(DB) {
+  const passengerReservationTwoWays = express.Router();
 
-  passengerReservationOneWay.post("/", async (req, res) => {
+  passengerReservationTwoWays.post("/", async (req, res) => {
+    console.log(req.body)
     try {
-      const newReservation = await DB.passengers.passengerReservationOneWay.create(req.body);
+      const newReservation = await DB.passengers.reservationTwoWays.create(req.body);
 
 
-      return res.json({newReservation });
+      return res.json({newReservation});
     } catch (error) {
       res.status(500).json({
         message: error.message,
@@ -17,9 +18,9 @@ export function passengerReservationOneWay(DB) {
     }
   });
 
-  passengerReservationOneWay.get("/", async (req, res) => {
+  passengerReservationTwoWays.get("/", async (req, res) => {
     try {
-      const reservations = await DB.passengers.passengerReservationOneWay.findAll(
+      const reservations = await DB.passengers.reservationTwoWays.findAll(
        
       );
       return res.json(reservations);
@@ -30,11 +31,11 @@ export function passengerReservationOneWay(DB) {
     }
   });
 
-  passengerReservationOneWay.get("/:reservation_id", async (req, res) => {
+  passengerReservationTwoWays.get("/:reservation_id", async (req, res) => {
     const { reservation_id } = req.params;
 
     try {
-      const reservation = await DB.passengers.passengerReservationOneWay.findByPk(
+      const reservation = await DB.passengers.reservationTwoWays.findByPk(
         reservation_id
       );
       if (!reservation) {
@@ -50,11 +51,11 @@ export function passengerReservationOneWay(DB) {
     }
   });
 
-  passengerReservationOneWay.put("/:reservation_id", async (req, res) => {
+  passengerReservationTwoWays.put("/:reservation_id", async (req, res) => {
     const { reservation_id } = req.params;
 
     try {
-      const reservation = await DB.passengers.passengerReservationOneWay.findByPk(
+      const reservation = await DB.passengers.reservationTwoWays.findByPk(
         reservation_id
       );
       if (!reservation) {
@@ -73,11 +74,11 @@ export function passengerReservationOneWay(DB) {
     }
   });
 
-  passengerReservationOneWay.delete("/:reservation_id", async (req, res) => {
+  passengerReservationTwoWays.delete("/:reservation_id", async (req, res) => {
     const { reservation_id } = req.params;
 
     try {
-      const reservation = await DB.passengers.passengerReservationOneWay.findByPk(
+      const reservation = await DB.passengers.reservationTwoWays.findByPk(
         reservation_id
       );
       if (!reservation) {
@@ -88,7 +89,10 @@ export function passengerReservationOneWay(DB) {
 
       await reservation.destroy();
 
-      res.sendStatus(204);
+      
+      res.status(200).json({
+        message: "Successfully deleted",
+      });
     } catch (error) {
       res.status(500).json({
         message: error.message,
@@ -96,5 +100,5 @@ export function passengerReservationOneWay(DB) {
     }
   });
 
-  return passengerReservationOneWay;
+  return passengerReservationTwoWays;
 }

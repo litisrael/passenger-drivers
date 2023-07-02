@@ -97,9 +97,8 @@ export function passengerReservationRouter(DB, sequelize = null) {
       }
 
       await reservation.destroy();
-      res.status(200).json({
-        message: "Successfully deleted",
-      });
+
+      res.sendStatus(204);
     } catch (error) {
       res.status(500).json({
         message: error.message,

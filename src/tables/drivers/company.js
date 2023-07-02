@@ -10,7 +10,6 @@ export const createCompany = (sequelize) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-       
       },
       company_name: {
         type: DataTypes.STRING(45),
@@ -20,46 +19,59 @@ export const createCompany = (sequelize) => {
       company_mail: {
         type: DataTypes.STRING(45),
         allowNull: false,
-        unique: true,
+        unique: {
+          arg: true,
+          msg: 'That email is already in use'
+      },
         validate: { isEmail: true },
       },
       company_cell: {
         type: DataTypes.STRING(20),
         allowNull: false,
-        // unique: true,
+        
+
+      //     unique: {
+      //     arg: true,
+      //     msg: 'That cel number is already in use"'
+      // },
         // validate: { isNumeric: true, len: [2, 10] },
       },
       is_work_available_multiple_days: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
       },
-
+  
       shomer_shabat: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
       },
+
+      payment_methods: {
+        type: DataTypes.ARRAY(DataTypes.STRING(40)),
+        allowNull: true,
+      },
       work_zone: {
 
-        type: DataTypes.ARRAY(DataTypes.ENUM(regionEnum())),
+        type: DataTypes.ARRAY(DataTypes.STRING()),
+        //  (DataTypes.ENUM(regionEnum()))
+        
         allowNull: false,
-        validate: {
-          isValidValues: function (value) {
-            const validValues = regionEnum();
-            const invalidValues = value.filter(
-              (val) => !validValues.includes(val)
-            );
-            if (invalidValues.length > 0) {
-              throw new Error(
-                `Invalid city values: ${invalidValues.join(", ")}`
-              );
-            }
-          },
-        },
+
+        // validate: {
+        //   isValidValues: function (value) {
+        //     const validValues = regionEnum();
+        //     const invalidValues = value.filter(
+        //       (val) => !validValues.includes(val)
+        //     );
+        //     if (invalidValues.length > 0) {
+        //       throw new Error(
+        //         `Invalid city values: ${invalidValues.join(", ")}`
+        //       );
+        //     }
+        //   },
+        // },
       },
-      // languages: {
-      //   type: DataTypes.ARRAY(DataTypes.STRING(30)),
-      //   allowNull: true,
-      // },
+
     },
     {
       tableName: "company",

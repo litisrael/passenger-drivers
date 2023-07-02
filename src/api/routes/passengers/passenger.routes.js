@@ -79,9 +79,7 @@ export function passengerRouter(DB) {
 
       await passenger.destroy();
 
-      res.status(200).json({
-        message: "Successfully deleted",
-      });
+      res.sendStatus(204);
     } catch (error) {
       res.status(500).json({
         message: error.message,
