@@ -29,12 +29,12 @@ export async function FormRegister(DB, sequelize) {
   } catch (error) {
     console.log("error");
 
-    if (trx) {
-      await trx.rollback();
-    }
-    return res.status(500).json({
-        message: error.message,
-      });
+    // if (trx) {
+    //   await trx.rollback();
+    // }
+    // return res.status(500).json({
+    //     message: error.message,
+    //   });
   }
 
   return FormRegister;

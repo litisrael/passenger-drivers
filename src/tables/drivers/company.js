@@ -40,15 +40,7 @@ export const createCompany = (sequelize) => {
         type: DataTypes.BOOLEAN,
         allowNull: true,
       },
-<<<<<<< HEAD
   
-=======
-      genero: { 
-        type: DataTypes.STRING ,
-        allowNull: true,
-      },
-
->>>>>>> fc6bd1b348a95f9ca6f1f0cdbcd7197657f91bd5
       shomer_shabat: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
@@ -58,7 +50,6 @@ export const createCompany = (sequelize) => {
         type: DataTypes.ARRAY(DataTypes.STRING(40)),
         allowNull: true,
       },
-<<<<<<< HEAD
       work_zone: {
 
         type: DataTypes.ARRAY(DataTypes.STRING()),
@@ -81,13 +72,6 @@ export const createCompany = (sequelize) => {
         // },
       },
 
-=======
-
-      // languages: {
-      //   type: DataTypes.ARRAY(DataTypes.STRING(30)),
-      //   allowNull: true,
-      // },
->>>>>>> fc6bd1b348a95f9ca6f1f0cdbcd7197657f91bd5
     },
     {
       tableName: "company",
