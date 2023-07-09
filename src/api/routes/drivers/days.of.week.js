@@ -6,7 +6,7 @@ export function dayOfWeekRouter(DB) {
   const daysOfWeek = dayOfWeekString()
   daysOfWeek.forEach((day) => {
     const table = DB.drivers.daysOfWeek.find(table => table.tableName === day);
-  
+ 
     dayOfWeekRouter.delete(`/${day}/:id`, async (req, res) => {
       const { id } = req.params;
       try {

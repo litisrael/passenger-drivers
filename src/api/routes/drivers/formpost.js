@@ -5,7 +5,7 @@ export function createFormRegister(DB, sequelize) {
   let trx = null; // Inicializa trx como null
 
   FormRegister.post("/", async (req, res) => {
-    // console.log(req.body);
+    console.log(req.body.data.formDays.days);
   
     try {
       trx = await sequelize.transaction(); // Asigna el resultado de sequelize.transaction() a trx
@@ -16,7 +16,7 @@ export function createFormRegister(DB, sequelize) {
   
       const companyId = company.company_id; // Obtener el UUID de la compañía creada
   
-      const vehicleData = req.body.data.formVehicle.map(vehicle => ({
+      const vehicleData = req.body.data.formVehicle.vehicle.map(vehicle => ({
         ...vehicle,
         company_id: companyId, // Asignar el UUID de la compañía al campo "company_id" del vehículo
       }));
@@ -24,7 +24,33 @@ export function createFormRegister(DB, sequelize) {
       const vehicles = await DB.drivers.vehicle.bulkCreate(vehicleData, {
         transaction: trx,
       });
-  
+     
+      // for (const vehicle of vehicles) {
+      //   const vehicleId = vehicle.vehicle_id;
+      
+        // for (const dayData of req.body.data.formDays.days) {
+        //   const { day, data } = dayData;
+        //   const table = DB.drivers.daysOfWeek.find(
+        //     (table) => table.tableName === day
+        //     );
+        //     const recordsToInsert = data.map(dataItem => ({
+        //       ...dataItem,
+        //       vehicle_id: vehicleId,
+        //     }));
+        //     console.log(table,"table")
+        
+        //     const result = await table.bulkCreate(recordsToInsert, {
+        //       transaction: trx,
+        //     });
+        
+        //     console.log(table,"table"); // Resultado de la inserción en la tabla del día
+        //   }
+        // }
+        // }
+        // const newDaysData = [];
+
+        
+      // }
       console.log("success");
       await trx.commit();
       return res.json({
@@ -46,60 +72,3 @@ export function createFormRegister(DB, sequelize) {
 
   return FormRegister;
 }
-
-// const companyId =company.dataValues.company_id
-// import express from "express";
-
-// export  function createFormRegister(DB, sequelize) {
-//   const FormRegister = express.Router();
-//   try {
-//     //creo q tendira que ser async
-//     const trx =  sequelize.transaction();
-//     FormRegister.post("/", async (req, res) => {
-
-      
-//       const Company = DB.drivers.company.create(req.body.formCompany, {
-//         transaction: trx,
-//       });
-//       const vehicle =  DB.drivers.vehicle.bulkCreate(req.body.formVehicle, {
-//         transaction: trx,
-//       });
-//       // const daysOfWeek = await DB.drivers.daysOfWeek.bulkCreate(data, {
-//       //   transaction: trx,
-//       // });
-//       // const vehiclesAvailabilityTourist =
-//       //   await DB.drivers.vehiclesAvailabilityTourist.bulkCreate(data, {
-//       //     transaction: trx,
-//       //   });
-
-//       console.log("success");
-//        trx.commit();
-//       return res.json({
-//         Company, vehicle,
-//         // daysOfWeek,vehiclesAvailabilityTourist
-//       });
-//     });
-//   } catch (error) {
-//     console.log("error");
-
-//     if (trx) {
-//        trx.rollback();
-//     }
-//     return res.status(500).json({
-//         message: error.message,
-//       });
-//   }
-
-//   return FormRegister;
-// }
-
-
-// // try {
-//     const newCompany = await DB.drivers.company.create(req.body );
-//     return res.json(newCompany);
-//   } catch (error) {
-//     return res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// });
