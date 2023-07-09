@@ -25,32 +25,30 @@ export function createFormRegister(DB, sequelize) {
         transaction: trx,
       });
      
-      // for (const vehicle of vehicles) {
-      //   const vehicleId = vehicle.vehicle_id;
+      for (const vehicle of vehicles) {
+        const vehicleId = vehicle.vehicle_id;
       
-        // for (const dayData of req.body.data.formDays.days) {
-        //   const { day, data } = dayData;
-        //   const table = DB.drivers.daysOfWeek.find(
-        //     (table) => table.tableName === day
-        //     );
-        //     const recordsToInsert = data.map(dataItem => ({
-        //       ...dataItem,
-        //       vehicle_id: vehicleId,
-        //     }));
-        //     console.log(table,"table")
+        for (const dayData of req.body.data.formDays.days) {
+          const { day, data } = dayData;
+          const table = DB.drivers.daysOfWeek.find(
+            (table) => table.tableName === day
+            );
+            const recordsToInsert = data.map(dataItem => ({
+              ...dataItem,
+              vehicle_id: vehicleId,
+            }));
+            console.log(recordsToInsert,"recordsToInsert")
         
-        //     const result = await table.bulkCreate(recordsToInsert, {
-        //       transaction: trx,
-        //     });
+            const result = await table.bulkCreate(recordsToInsert, {
+              transaction: trx,
+            });
         
-        //     console.log(table,"table"); // Resultado de la inserción en la tabla del día
-        //   }
-        // }
-        // }
-        // const newDaysData = [];
-
+            console.log(result); // Resultado de la inserción en la tabla del día
+          }
+        }
+      
         
-      // }
+      
       console.log("success");
       await trx.commit();
       return res.json({
