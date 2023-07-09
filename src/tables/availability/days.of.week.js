@@ -13,11 +13,11 @@ export const createDaysOfWeek = (sequelize) => {
       },
       unavailable_starting: {
         type: DataTypes.TIME,
-        // defaultValue: '00:01'
+        defaultValue: '00:00'
       },
       unavailable_until: {
         type: DataTypes.TIME,
-        // defaultValue: '00:02'
+        defaultValue: '00:00'
       }
     }, {
       tableName: dayOfWeek,
@@ -26,17 +26,17 @@ export const createDaysOfWeek = (sequelize) => {
     });
 
     // Añadir los hooks de validación a cada tabla
-    // table.beforeBulkCreate(async (models) => {
-    //   for (const model of models) {
-    //     validateHourBeforeHour(model.unavailable_starting, model.unavailable_until);
-    //   }
-    // });
+    table.beforeBulkCreate(async (models) => {
+      for (const model of models) {
+        validateHourBeforeHour(model.unavailable_starting, model.unavailable_until);
+      }
+    });
 
-    // table.beforeBulkUpdate(async (models) => {
-    //   for (const model of models) {
-    //     validateHourBeforeHour(model.unavailable_starting, model.unavailable_until);
-    //   }
-    // });
+    table.beforeBulkUpdate(async (models) => {
+      for (const model of models) {
+        validateHourBeforeHour(model.unavailable_starting, model.unavailable_until);
+      }
+    });
 
     return table;
   });
