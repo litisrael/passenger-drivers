@@ -2,11 +2,11 @@ import { getConnection } from "../database/conecction.js";
 import { createPassenger } from "./passengers/passenger.js";
 import { createReservationTourist } from "./passengers/reserve.tourist.js";
 import { createCompany } from "./drivers/company.js";
-import { createVehicleAvailabilityTourist } from "./availability/vehicles.availability.tourist.js";
+import { createVehicleAvailabilityTourist } from "./drivers/availability/vehicles.availability.tourist.js";
 import { createVehicle } from "./drivers/vehicles.js";
 import { createReservationOneWay } from "./passengers/reserve.one.way.js";
 // import { queryDriversOfReserve } from "../api/query/reserve.drivers.js";
-import { createDaysOfWeek } from "./availability/days.of.week.js";
+import { createDaysOfWeek } from "./drivers/availability/days.of.week.js";
 import { createReservationTwoWays } from "./passengers/reserve.two.ways.js";
 async function tablesDrivers(sequelize) {
   const daysOfWeek =  createDaysOfWeek(sequelize);

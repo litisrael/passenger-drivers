@@ -8,7 +8,7 @@ export function createFormRegister(DB, sequelize) {
     console.log(req.body.data.formDays.days);
   
     try {
-      trx = await sequelize.transaction(); // Asigna el resultado de sequelize.transaction() a trx
+      trx = await sequelize.transaction(); 
   
       const company = await DB.drivers.company.create(req.body.data.formCompany, {
         transaction: trx,
@@ -49,7 +49,10 @@ export function createFormRegister(DB, sequelize) {
             // console.log(result); // Resultado de la inserción en la tabla del día
           }
         }
-      
+        // const availableTourist = await DB.drivers.vehiclesAvailabilityTourist.bulkCreate("req.body.data", {
+        //   transaction: trx,
+        // });
+    
         
       
       

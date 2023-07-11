@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { validateHourBeforeHour, validateABeforeB } from "../utility.js";
+import { validateHourBeforeHour, validateABeforeB } from "../../utility.js";
 
 export const createDaysOfWeek = (sequelize) => {
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
