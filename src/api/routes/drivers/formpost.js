@@ -25,6 +25,7 @@ export function createFormRegister(DB, sequelize) {
         transaction: trx,
       });
       let result = [];
+
       for (const vehicle of vehicles) {
         const vehicleId = vehicle.vehicle_id;
       
@@ -37,25 +38,30 @@ export function createFormRegister(DB, sequelize) {
               ...dataItem,
               vehicle_id: vehicleId,
             }));
-            console.log(recordsToInsert,"recordsToInsert")
+           
         
-            const result = await table.bulkCreate(recordsToInsert, {
+            const  dataDay = await table.bulkCreate(recordsToInsert, {
               transaction: trx,
+              
             });
         
+        result.push(dataDay)
             // console.log(result); // Resultado de la inserción en la tabla del día
           }
         }
       
         
       
-      console.log("success");
-      await trx.commit();
-      return res.json({
-        company,
-        vehicles,
-        result
-      });
+      
+      await trx.commit()  
+      .then(() => {
+        
+        return res.json({
+          company,
+          vehicles,
+          result
+        });
+      })
     } catch (error) {
       console.log("error");
   

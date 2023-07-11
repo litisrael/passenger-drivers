@@ -15,8 +15,8 @@ export function createVehicleAvailabilityTourist(sequelize) {
     {
       id: {
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        autoIncrement: true,
       },
 
       available_from: {
