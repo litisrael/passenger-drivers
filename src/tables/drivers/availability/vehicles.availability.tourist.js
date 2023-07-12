@@ -5,8 +5,8 @@ import {
   nextYear,
   currentDate,
   validateAfterCurrentDate,
-} from "../utility.js";
-import { validateDateNotBetweenExisting } from "../query/available_drivers.js";
+} from "../../utility.js";
+import { validateDateNotBetweenExisting } from "../../query/available_drivers.js";
 
 
 export function createVehicleAvailabilityTourist(sequelize) {

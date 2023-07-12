@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { validateHourBeforeHour, validateABeforeB } from "../utility.js";
+import { validateHourBeforeHour, validateABeforeB } from "../../utility.js";
 
 export const createDaysOfWeek = (sequelize) => {
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -13,11 +13,11 @@ export const createDaysOfWeek = (sequelize) => {
       },
       unavailable_starting: {
         type: DataTypes.TIME,
-        defaultValue: '00:00'
+        // defaultValue: '00:00'
       },
       unavailable_until: {
         type: DataTypes.TIME,
-        defaultValue: '00:01'
+        // defaultValue: '00:00'
       }
     }, {
       tableName: dayOfWeek,

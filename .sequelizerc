@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 const path = require('path');
 
@@ -6,4 +7,13 @@ module.exports = {
   'models-path': path.resolve("./src/database", 'models'),
   'seeders-path': path.resolve("./src/database",'seeders'),
   'migrations-path': path.resolve("./src/database",'migrations')
+=======
+const path = require('path');
+
+module.exports = {
+  'config': path.resolve('./src/database/mig/config', 'config.cjs'),
+  'models-path': path.resolve('./src/database/mig', 'models'),
+  'seeders-path': path.resolve('./src/database/mig', 'seeders'),
+  'migrations-path': path.resolve('./src/database/mig', 'migrations')
+>>>>>>> 1acb9150ca0f12ff4c52126f39d14f8054f5bc90
 };

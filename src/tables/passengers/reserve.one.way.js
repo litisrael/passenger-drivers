@@ -6,9 +6,14 @@ import {
 } from "../utility.js";
 import { queryAvailableDriversForTrip } from "../query/oneway.js";
 
+<<<<<<< HEAD
 let DriversForOneWay;
+=======
+>>>>>>> 1acb9150ca0f12ff4c52126f39d14f8054f5bc90
 
 // console.log("soy DriversForOneWay_-------___",DriversForOneWay)
+
+let DriversForOneWay;
 
 export const createReservationOneWay = (sequelize) => {
   const ReservationOneWay = sequelize.define(
@@ -64,7 +69,11 @@ export const createReservationOneWay = (sequelize) => {
   });
 
   ReservationOneWay.beforeUpdate(async (model) => {
+<<<<<<< HEAD
     const dayOfWeekInEnglish = await getDayOfWeekInEnglish(
+=======
+    const dayOfWeekInEnglish =  getDayOfWeekInEnglish(
+>>>>>>> 1acb9150ca0f12ff4c52126f39d14f8054f5bc90
       model.departure_date
     );
     model.day_week = dayOfWeekInEnglish;

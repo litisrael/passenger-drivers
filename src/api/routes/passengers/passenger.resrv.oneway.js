@@ -5,12 +5,11 @@ export function passengerReservationOneWay(DB) {
   const passengerReservationOneWay = express.Router();
 
   passengerReservationOneWay.post("/", async (req, res) => {
-    console.log(req.body)
     try {
       const newReservation = await DB.passengers.passengerReservationOneWay.create(req.body);
 
 
-      return res.json({newReservation});
+      return res.json({newReservation });
     } catch (error) {
       res.status(500).json({
         message: error.message,
@@ -89,10 +88,7 @@ export function passengerReservationOneWay(DB) {
 
       await reservation.destroy();
 
-      
-      res.status(200).json({
-        message: "Successfully deleted",
-      });
+      res.sendStatus(204);
     } catch (error) {
       res.status(500).json({
         message: error.message,

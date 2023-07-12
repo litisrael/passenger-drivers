@@ -3,6 +3,7 @@ import { dayOfWeekString } from "../../../tables/utility.js";
 
 export  function allDaysRouter(DB) {
   const dayOfWeekRouter = express.Router();
+  
   const daysOfWeek = dayOfWeekString();
 
   
@@ -67,7 +68,7 @@ export  function allDaysRouter(DB) {
       const newDaysData = [];
 
       for (const dayData of req.body) {
-        const { day, data } = dayData;
+          const { day, data } = dayData;
         const table = DB.drivers.daysOfWeek.find(
           (table) => table.tableName === day
         );

@@ -80,4 +80,3 @@ export function createFormRegister(DB, sequelize) {
 
   return FormRegister;
 }
-

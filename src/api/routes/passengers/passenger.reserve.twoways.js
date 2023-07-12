@@ -10,7 +10,11 @@ export function passengerReservationTwoWays(DB) {
       const newReservation = await DB.passengers.reservationTwoWays.create(req.body);
 
 
+<<<<<<< HEAD
       return res.json(newReservation);
+=======
+      return res.json({newReservation});
+>>>>>>> 1acb9150ca0f12ff4c52126f39d14f8054f5bc90
     } catch (error) {
       res.status(500).json({
         message: error.message,

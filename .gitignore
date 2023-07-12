@@ -4227,12 +4227,15 @@ node_modules/d/.github/FUNDING.yml
 node_modules/d/test/auto-bind.js
 node_modules/d/test/index.js
 node_modules/d/test/lazy.js
+<<<<<<< HEAD
 node_modules/denque/CHANGELOG.md
 node_modules/denque/index.d.ts
 node_modules/denque/index.js
 node_modules/denque/LICENSE
 node_modules/denque/package.json
 node_modules/denque/README.md
+=======
+>>>>>>> 1acb9150ca0f12ff4c52126f39d14f8054f5bc90
 node_modules/editorconfig/CHANGELOG.md
 node_modules/editorconfig/LICENSE
 node_modules/editorconfig/package.json
@@ -5022,6 +5025,7 @@ node_modules/fs.realpath/LICENSE
 node_modules/fs.realpath/old.js
 node_modules/fs.realpath/package.json
 node_modules/fs.realpath/README.md
+<<<<<<< HEAD
 node_modules/generate-function/.travis.yml
 node_modules/generate-function/example.js
 node_modules/generate-function/index.js
@@ -5029,6 +5033,8 @@ node_modules/generate-function/LICENSE
 node_modules/generate-function/package.json
 node_modules/generate-function/README.md
 node_modules/generate-function/test.js
+=======
+>>>>>>> 1acb9150ca0f12ff4c52126f39d14f8054f5bc90
 node_modules/get-caller-file/index.d.ts
 node_modules/get-caller-file/index.js
 node_modules/get-caller-file/index.js.map
@@ -5085,11 +5091,14 @@ node_modules/is-promise/index.mjs
 node_modules/is-promise/LICENSE
 node_modules/is-promise/package.json
 node_modules/is-promise/readme.md
+<<<<<<< HEAD
 node_modules/is-property/.npmignore
 node_modules/is-property/is-property.js
 node_modules/is-property/LICENSE
 node_modules/is-property/package.json
 node_modules/is-property/README.md
+=======
+>>>>>>> 1acb9150ca0f12ff4c52126f39d14f8054f5bc90
 node_modules/js-beautify/LICENSE
 node_modules/js-beautify/package.json
 node_modules/js-beautify/README.md
@@ -5150,6 +5159,7 @@ node_modules/jsonfile/LICENSE
 node_modules/jsonfile/package.json
 node_modules/jsonfile/README.md
 node_modules/jsonfile/utils.js
+<<<<<<< HEAD
 node_modules/long/index.d.ts
 node_modules/long/index.js
 node_modules/long/LICENSE
@@ -5158,6 +5168,8 @@ node_modules/long/README.md
 node_modules/long/umd/index.d.ts
 node_modules/long/umd/index.js
 node_modules/long/umd/package.json
+=======
+>>>>>>> 1acb9150ca0f12ff4c52126f39d14f8054f5bc90
 node_modules/lru-queue/.lint
 node_modules/lru-queue/.npmignore
 node_modules/lru-queue/.travis.yml
@@ -5195,6 +5207,7 @@ node_modules/memoizee/normalizers/get-fixed.js
 node_modules/memoizee/normalizers/get-primitive-fixed.js
 node_modules/memoizee/normalizers/get.js
 node_modules/memoizee/normalizers/primitive.js
+<<<<<<< HEAD
 node_modules/mysql2/index.d.ts
 node_modules/mysql2/index.js
 node_modules/mysql2/License
@@ -5355,6 +5368,8 @@ node_modules/named-placeholders/node_modules/lru-cache/index.mjs
 node_modules/named-placeholders/node_modules/lru-cache/LICENSE
 node_modules/named-placeholders/node_modules/lru-cache/package.json
 node_modules/named-placeholders/node_modules/lru-cache/README.md
+=======
+>>>>>>> 1acb9150ca0f12ff4c52126f39d14f8054f5bc90
 node_modules/next-tick/.editorconfig
 node_modules/next-tick/.lint
 node_modules/next-tick/CHANGELOG.md
@@ -5490,6 +5505,7 @@ node_modules/resolve/test/resolver/symlinked/package/bar.js
 node_modules/resolve/test/resolver/symlinked/package/package.json
 node_modules/resolve/test/resolver/without_basedir/main.js
 node_modules/resolve/test/shadowed_core/node_modules/util/index.js
+<<<<<<< HEAD
 node_modules/seq-queue/.jshintrc
 node_modules/seq-queue/.npmignore
 node_modules/seq-queue/AUTHORS
@@ -5501,6 +5517,8 @@ node_modules/seq-queue/README.md
 node_modules/seq-queue/lib/.npmignore
 node_modules/seq-queue/lib/seq-queue.js
 node_modules/seq-queue/test/seq-queue-test.js
+=======
+>>>>>>> 1acb9150ca0f12ff4c52126f39d14f8054f5bc90
 node_modules/sequelize-cli/LICENSE
 node_modules/sequelize-cli/package.json
 node_modules/sequelize-cli/README.md
@@ -5543,12 +5561,15 @@ node_modules/sigmund/package.json
 node_modules/sigmund/README.md
 node_modules/sigmund/sigmund.js
 node_modules/sigmund/test/basic.js
+<<<<<<< HEAD
 node_modules/sqlstring/HISTORY.md
 node_modules/sqlstring/index.js
 node_modules/sqlstring/LICENSE
 node_modules/sqlstring/package.json
 node_modules/sqlstring/README.md
 node_modules/sqlstring/lib/SqlString.js
+=======
+>>>>>>> 1acb9150ca0f12ff4c52126f39d14f8054f5bc90
 node_modules/string-width/index.d.ts
 node_modules/string-width/index.js
 node_modules/string-width/license
@@ -5800,6 +5821,7 @@ node_modules/yargs-parser/build/lib/string-utils.js
 node_modules/yargs-parser/build/lib/tokenize-arg-string.js
 node_modules/yargs-parser/build/lib/yargs-parser-types.js
 node_modules/yargs-parser/build/lib/yargs-parser.js
+<<<<<<< HEAD
 node_modules/.bin/acorn
 node_modules/.bin/acorn.cmd
 node_modules/.bin/acorn.ps1
@@ -5854,6 +5876,19 @@ node_modules/.bin/rimraf.ps1
 node_modules/.bin/uglifyjs
 node_modules/.bin/uglifyjs.cmd
 node_modules/.bin/uglifyjs.ps1
+=======
+<<<<<<< HEAD
+node_modules/cors/CONTRIBUTING.md
+node_modules/cors/HISTORY.md
+node_modules/cors/LICENSE
+node_modules/cors/package.json
+node_modules/cors/README.md
+node_modules/cors/lib/index.js
+node_modules/object-assign/index.js
+node_modules/object-assign/license
+node_modules/object-assign/package.json
+node_modules/object-assign/readme.md
+>>>>>>> 1acb9150ca0f12ff4c52126f39d14f8054f5bc90
 node_modules/@babel/parser/CHANGELOG.md
 node_modules/@babel/parser/index.cjs
 node_modules/@babel/parser/LICENSE
@@ -5939,6 +5974,7 @@ node_modules/@babel/parser/lib/util/scopeflags.js.map
 node_modules/@babel/parser/lib/util/whitespace.js
 node_modules/@babel/parser/lib/util/whitespace.js.map
 node_modules/@babel/parser/typings/babel-parser.d.ts
+<<<<<<< HEAD
 node_modules/@googlemaps/routing/CHANGELOG.md
 node_modules/@googlemaps/routing/LICENSE
 node_modules/@googlemaps/routing/package.json
@@ -8088,3 +8124,8 @@ node_modules/xmlcreate/lib/nodes/XmlEntityRef.d.ts
 node_modules/xmlcreate/lib/nodes/XmlEntityRef.js
 node_modules/xmlcreate/lib/nodes/XmlProcInst.d.ts
 node_modules/xmlcreate/lib/nodes/XmlProcInst.js
+=======
+node_modules/object-hash/dist/object_hash.js
+=======
+>>>>>>> fc6bd1b348a95f9ca6f1f0cdbcd7197657f91bd5
+>>>>>>> 1acb9150ca0f12ff4c52126f39d14f8054f5bc90
